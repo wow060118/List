@@ -1,8 +1,10 @@
 package com.example.yfr.list;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 
 import android.view.MotionEvent;
@@ -26,8 +29,15 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
+import com.alibaba.fastjson.JSON;
+import com.example.yfr.list.db.DaoMaster;
+import com.example.yfr.list.db.DaoSession;
+import com.example.yfr.list.db.Entity;
+import com.example.yfr.list.db.EntityDao;
 import com.google.common.collect.Lists;
 import com.example.yfr.mylibrary.Say;
+
+import org.greenrobot.greendao.database.Database;
 
 import java.io.InputStream;
 import java.util.List;
@@ -36,16 +46,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView recyclerView;
     private List<String> list;
     MyAdapter myAdapter;
-    Button add,remove;
+    Button add,remove,databtn,readBtn;
     private ImageView imageView;
     private ImageView bImageView;
 
     private Dialog dialog;
 
+    private DaoSession daoSession;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initDataBase();
         initData();
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -65,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        recyclerView.setItemAnimator( new DefaultItemAnimator());
         add = findViewById(R.id.btn);
         remove = findViewById(R.id.remove);
+        databtn = findViewById(R.id.dataBaseButton);
+        readBtn = findViewById(R.id.dataBaseButtonRead);
         imageView = findViewById(R.id.img);
         bImageView = getBIimageView();
 
@@ -114,6 +129,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void initDataBase() {
+        createDataBase(MainActivity.this);
+    }
+
     public void initData() {
         list = Lists.newArrayList();
         for (int i = 0; i < 10; i++) {
@@ -140,20 +159,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v==add) {
             int i = list.size();
             list.add(i + "");
-            System.out.println("list size" + list.size());
+            Log.i("add size",list.size()+"");
             myAdapter.setList(list);
             recyclerView.setAdapter(myAdapter);
         }else if(v==remove){
 
             int i = list.size();
             if(i==0){
-                System.out.println("none");
+                Log.i("size none",list.size()+"");
             } else {
                 list.remove(i - 1);
-                System.out.println("list size" + list.size());
+                Log.i("del size",list.size()+"");
                 myAdapter.setList(list);
                 recyclerView.setAdapter(myAdapter);
             }
+        } else if(v==databtn){
+
+            Entity entity = new Entity();
+            entity.setAge("10");
+            entity.setName("demo");
+            try {
+                daoSession.getEntityDao().insert(entity);
+            }catch (Exception e){
+                Log.i("data error",e.getMessage());
+            }
+            Toast.makeText(MainActivity.this, "增加一条数据", Toast.LENGTH_LONG).show();
+        } else if(v==readBtn){
+
+            try {
+                List<Entity> list = daoSession.getEntityDao().queryBuilder()
+                        .where(EntityDao.Properties.Age.le(10))
+                        .build().list();
+                Log.i("queryList is", JSON.toJSONString(list));
+            }catch (Exception e){
+                Log.i("data error",e.getMessage());
+            }
+            Toast.makeText(MainActivity.this, "查询数据", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -194,7 +235,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    private void createDataBase(Context context){
+        DaoMaster.DevOpenHelper devOpenHelper=new DaoMaster.DevOpenHelper(context ,"demo.db");
+        Database database=devOpenHelper.getWritableDb();
+        DaoMaster daoMaster =new DaoMaster(database);
+        daoSession = daoMaster.newSession();
+        EntityDao entityDao = daoSession.getEntityDao();
+        entityDao.createTable(database,true);
+    }
 
-
+    public DaoSession getDaoSession(){
+        return daoSession;
+    }
 
 }

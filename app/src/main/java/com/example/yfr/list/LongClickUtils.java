@@ -23,7 +23,7 @@ public class LongClickUtils {
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_UP:
-                        System.out.println("ACTION_UP");
+//                        System.out.println("ACTION_UP");
                         handler.removeCallbacks(r);
 //                        if (System.currentTimeMillis() - l > delayMillis) {
 //                            if (longClickListener != null) {
@@ -36,12 +36,12 @@ public class LongClickUtils {
                     case MotionEvent.ACTION_MOVE:
                         if (Math.abs(mLastMotionX - x) > TOUCH_MAX
                                 || Math.abs(mLastMotionY - y) > TOUCH_MAX) {
-                            System.out.println("ACTION_MOVE");
+//                            System.out.println("ACTION_MOVE");
                             handler.removeCallbacks(r);
                         }
                         break;
                     case MotionEvent.ACTION_DOWN:
-                        System.out.println("ACTION_DOWN");
+//                        System.out.println("ACTION_DOWN");
                         handler.removeCallbacks(r);
                         mLastMotionX = x;
                         mLastMotionY = y;

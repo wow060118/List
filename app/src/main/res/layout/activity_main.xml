@@ -10,6 +10,9 @@
         android:id="@+id/btn"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="23dp"
         android:onClick="onClick"
         android:text="增加" />
 
@@ -23,6 +26,32 @@
         android:layout_marginTop="78dp"
         android:onClick="onClick"
         android:text="删除" />
+
+    <Button
+        android:id="@+id/dataBaseButtonRead"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="243dp"
+        android:layout_marginRight="243dp"
+        android:layout_marginBottom="42dp"
+        android:onClick="onClick"
+        android:text="查询数据" />
+
+    <Button
+        android:id="@+id/dataBaseButton"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="241dp"
+        android:layout_marginRight="241dp"
+        android:layout_marginBottom="127dp"
+        android:onClick="onClick"
+        android:text="增加数据" />
 
 
     <android.support.v7.widget.RecyclerView
