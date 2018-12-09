@@ -1,11 +1,10 @@
 package com.example.yfr.list;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -17,12 +16,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -35,7 +30,6 @@ import com.example.yfr.list.db.DaoSession;
 import com.example.yfr.list.db.Entity;
 import com.example.yfr.list.db.EntityDao;
 import com.google.common.collect.Lists;
-import com.example.yfr.mylibrary.Say;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -46,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView recyclerView;
     private List<String> list;
     MyAdapter myAdapter;
-    Button add,remove,databtn,readBtn;
+    Button add,remove,databtn,readBtn,download;
     private ImageView imageView;
     private ImageView bImageView;
 
@@ -80,7 +74,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         remove = findViewById(R.id.remove);
         databtn = findViewById(R.id.dataBaseButton);
         readBtn = findViewById(R.id.dataBaseButtonRead);
+        download =findViewById(R.id.download);
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,Download.class);
+                startActivity(i);
+
+            }
+        });
         imageView = findViewById(R.id.img);
+
         bImageView = getBIimageView();
 
         dialog = new Dialog(MainActivity.this);
