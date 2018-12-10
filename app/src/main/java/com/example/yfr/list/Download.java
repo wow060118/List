@@ -1,9 +1,12 @@
 package com.example.yfr.list;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -32,9 +35,22 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url="http://pic41.nipic.com/";
-//                String url="http://7xstkb.com1.z0.glb.clouddn.com/agen_apple.mp4/";
+//                String url="http://pic41.nipic.com/";
+                String url="https://github.com/wow060118/petreact/archive/";
                 String path = Environment.getExternalStorageDirectory() + "/DownloadFileTwo";
+
+                final int REQUEST_EXTERNAL_STORAGE = 1;
+                String[] PERMISSIONS_STORAGE = {
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                int permission = ActivityCompat.checkSelfPermission(Download.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+                if (permission != PackageManager.PERMISSION_GRANTED) {
+                    // We don't have permission so prompt the user
+                    ActivityCompat.requestPermissions(Download.this, PERMISSIONS_STORAGE,
+                            REQUEST_EXTERNAL_STORAGE);
+                }
                 DownloadUtil.download(url, path, new DownloadListener() {
                     @Override
                     public void onStart() {

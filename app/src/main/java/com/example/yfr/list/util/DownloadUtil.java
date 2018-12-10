@@ -24,37 +24,45 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class DownloadUtil {
 
 
-    private static int sBufferSize = 2048;
+    private static int sBufferSize = 10240;
 
+//    static final String real="20140509/4746986_145156378323_2.jpg";
+    static final String real = "master.zip";
     public static void download(final String url, final String path, final DownloadListener downloadListener) {
 
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                //这个就是converterFactory 数据分析器
-                .addConverterFactory(GsonConverterFactory.create())
+        System.out.println("start   ");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Retrofit retrofit = new Retrofit.Builder()
+                        //这个就是converterFactory 数据分析器
+                        .addConverterFactory(GsonConverterFactory.create())
 //                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(url)
-                .build();
+                        .baseUrl(url)
+                        .build();
 
-        DownloadApi dApi = retrofit.create(DownloadApi.class);
-        String real="20140509/4746986_145156378323_2.jpg";
-        Call<ResponseBody> news = dApi.down(real);
-        news.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                writeResponseToDisk(path,response,downloadListener);
-//                ResponseBody body = response.body();
-//                System.out.println(call);
-//                System.out.println("onResponse:   ="+ JSON.toJSONString(response)+"    body:"+body);
+                DownloadApi dApi = retrofit.create(DownloadApi.class);
+//
+                Call<ResponseBody> news = dApi.down(real);
+                news.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call,  Response<ResponseBody> response) {
+                        ResponseBody body = response.body();
+                        System.out.println(call);
+                        System.out.println("onResponse:   ="+ JSON.toJSONString(response)+"    body:"+body);
+                        writeResponseToDisk(path,response,downloadListener);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        System.out.println("onResponse fail:   =" + t.getMessage());
+
+                    }
+                });
             }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("onResponse fail:   =" + t.getMessage());
-
-            }
-        });
+        }).run();
+        System.out.println("end   ");
 
     }
 
@@ -69,14 +77,14 @@ public class DownloadUtil {
     private static void writeFileFromIS(String path, InputStream is, long totalLength, DownloadListener downloadListener) {
         //开始下载
         downloadListener.onStart();
-        System.out.println("++++++"+path+"    ");
+//        System.out.println("++++++"+path+"    ");
         File file = new File(path);
         //创建文件
         if (!file.exists()||file.isDirectory()) {
             file.mkdirs();
-            System.out.println("1111+"+file.mkdirs());
+//            System.out.println("1111+"+file.mkdirs());
         }
-        String newFilePath = path+File.separator+"test_img.png";
+        String newFilePath = path+File.separator+real;
 //        String newFilePath = path+File.separator+"test_img.mp4";
         File newFile= new File(newFilePath);
         try {
@@ -85,7 +93,7 @@ public class DownloadUtil {
             e.printStackTrace();
         }
         try {
-            System.out.println("1111111111111+++++");
+//            System.out.println("1111111111111+++++");
             newFile.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
