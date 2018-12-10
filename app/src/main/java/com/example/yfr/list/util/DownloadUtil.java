@@ -29,7 +29,7 @@ public class DownloadUtil {
 
     private static int sBufferSize = 10240;
 
-//    static final String real="20140509/4746986_145156378323_2.jpg";
+//    static final String real="4746986_145156378323_2.jpg";
     static final String real = "master.zip";
     public static void download(final String url, final String path, final DownloadListener downloadListener, final Handler handler) {
 
@@ -47,24 +47,30 @@ public class DownloadUtil {
                 DownloadApi dApi = retrofit.create(DownloadApi.class);
 //
                 Call<ResponseBody> news = dApi.down(real);
-                news.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call,  Response<ResponseBody> response) {
-//                        ResponseBody body = response.body();
-//                        System.out.println(call);
-//                        System.out.println("onResponse:   ="+ JSON.toJSONString(response)+"    body:"+body);
-                        writeResponseToDisk(path,response,downloadListener,handler);
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        System.out.println("onResponse fail:   =" + t.getMessage());
-
-                    }
-                });
+//                news.enqueue(new Callback<ResponseBody>() {
+////                    @Override
+////                    public void onResponse(Call<ResponseBody> call,  Response<ResponseBody> response) {
+//////                        ResponseBody body = response.body();
+//////                        System.out.println(call);
+//////                        System.out.println("onResponse:   ="+ JSON.toJSONString(response)+"    body:"+body);
+////                        writeResponseToDisk(path,response,downloadListener,handler);
+////
+////                    }
+////
+////                    @Override
+////                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+////                        System.out.println("onResponse fail:   =" + t.getMessage());
+////
+////                    }
+////                });
+                try {
+                    Response<ResponseBody> response = news.execute();
+                    writeResponseToDisk(path,response,downloadListener,handler);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        }).run();
+        }).start();
         System.out.println("end   ");
 
     }
@@ -79,7 +85,7 @@ public class DownloadUtil {
     //将输入流写入文件
     private static void writeFileFromIS(String path, InputStream is, final long totalLength, final DownloadListener downloadListener, final Handler handler) {
         //开始下载
-        downloadListener.onStart();
+//        downloadListener.onStart();
 //        System.out.println("++++++"+path+"    ");
         File file = new File(path);
         //创建文件
@@ -112,7 +118,7 @@ public class DownloadUtil {
                 currentLength += len;
                 //计算当前下载进度
                 System.out.println("total is ：" +totalLength+"   now :" +currentLength);
-                downloadListener.onProgress((int) (100 * currentLength / totalLength));
+//                downloadListener.onProgress((int) (100 * currentLength / totalLength));
                 Message message=new Message();
                 message.what=1;
                 Bundle bundle=new Bundle();

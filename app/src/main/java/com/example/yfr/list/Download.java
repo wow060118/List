@@ -54,8 +54,8 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String url="http://pic41.nipic.com/";
-                String url="https://github.com/wow060118/petreact/archive/";
+//                String url="http://pic41.nipic.com/20140509/";
+                String url="https://github.com/wow060118/pet/archive/";
                 String path = Environment.getExternalStorageDirectory() + "/DownloadFileTwo";
 
                 final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -81,14 +81,28 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
                     }
 
                     @Override
-                    public void onProgress(int progress) {
+                    public void onProgress(final int progress) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                System.out.println("onProgress update"+ progress);
+                                bar.setProgress(progress);
+                                textView.setText(progress + "%");
+                            }
+                        });
 
 
                     }
 
                     @Override
-                    public void onFinish(String path) {
-                        Toast.makeText(Download.this, "下载成功，存放路经是：" + path, Toast.LENGTH_LONG).show();
+                    public void onFinish(final String path) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(Download.this, "下载成功，存放路经是：" + path, Toast.LENGTH_LONG).show();
+
+                            }
+                        });
 
                     }
 
