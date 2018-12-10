@@ -1,6 +1,9 @@
 package com.example.yfr.list.util;
 
+import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
@@ -28,7 +31,7 @@ public class DownloadUtil {
 
 //    static final String real="20140509/4746986_145156378323_2.jpg";
     static final String real = "master.zip";
-    public static void download(final String url, final String path, final DownloadListener downloadListener) {
+    public static void download(final String url, final String path, final DownloadListener downloadListener, final Handler handler) {
 
         System.out.println("start   ");
         new Thread(new Runnable() {
@@ -47,10 +50,10 @@ public class DownloadUtil {
                 news.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call,  Response<ResponseBody> response) {
-                        ResponseBody body = response.body();
-                        System.out.println(call);
-                        System.out.println("onResponse:   ="+ JSON.toJSONString(response)+"    body:"+body);
-                        writeResponseToDisk(path,response,downloadListener);
+//                        ResponseBody body = response.body();
+//                        System.out.println(call);
+//                        System.out.println("onResponse:   ="+ JSON.toJSONString(response)+"    body:"+body);
+                        writeResponseToDisk(path,response,downloadListener,handler);
 
                     }
 
@@ -66,15 +69,15 @@ public class DownloadUtil {
 
     }
 
-    private static void writeResponseToDisk(String path, Response<ResponseBody> response, DownloadListener downloadListener) {
+    private static void writeResponseToDisk(String path, Response<ResponseBody> response, DownloadListener downloadListener,Handler handler) {
         //从response获取输入流以及总大小
-        writeFileFromIS(path, response.body().byteStream(), response.body().contentLength(), downloadListener);
+        writeFileFromIS(path, response.body().byteStream(), response.body().contentLength(), downloadListener,handler);
     }
 
 
 
     //将输入流写入文件
-    private static void writeFileFromIS(String path, InputStream is, long totalLength, DownloadListener downloadListener) {
+    private static void writeFileFromIS(String path, InputStream is, final long totalLength, final DownloadListener downloadListener, final Handler handler) {
         //开始下载
         downloadListener.onStart();
 //        System.out.println("++++++"+path+"    ");
@@ -110,6 +113,25 @@ public class DownloadUtil {
                 //计算当前下载进度
                 System.out.println("total is ：" +totalLength+"   now :" +currentLength);
                 downloadListener.onProgress((int) (100 * currentLength / totalLength));
+                Message message=new Message();
+                message.what=1;
+                Bundle bundle=new Bundle();
+                bundle.putInt("progress",(int) (100 * currentLength / totalLength));
+                message.setData(bundle);
+                handler.sendMessage(message);
+//                final long finalCurrentLength = currentLength;
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        handler.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                downloadListener.onProgress((int) (100 * finalCurrentLength / totalLength));
+//                            }
+//                        });
+//                    }
+//                }).start();
+
             }
             //下载完成，并返回保存的文件路径
             downloadListener.onFinish(newFile.getAbsolutePath());
@@ -130,6 +152,8 @@ public class DownloadUtil {
                 e.printStackTrace();
             }
         }
+
     }
+
 
 }

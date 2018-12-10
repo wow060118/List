@@ -25,12 +25,31 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
     Button button, test;
     int mProgressStatus = 0;
 
+    ProgressBar bar;
+    TextView textView ;
+
+    private static final int UPDATE=1;
+    private Handler handler=new Handler(){
+        public void handleMessage(Message message){
+            switch (message.what){
+                case UPDATE:
+                    Bundle data = message.getData();
+                    final int text = data.getInt("progress");
+                    System.out.println("update"+ text);
+                    bar.setProgress(text);
+                    textView.setText(text + "%");
+            }
+
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.download);
-        final ProgressBar bar = findViewById(R.id.progress);
-        final TextView textView = findViewById(R.id.tvProgress);
+
+        bar = findViewById(R.id.progress);
+        textView = findViewById(R.id.tvProgress);
+
         button = findViewById(R.id.download1);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +70,9 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
                     ActivityCompat.requestPermissions(Download.this, PERMISSIONS_STORAGE,
                             REQUEST_EXTERNAL_STORAGE);
                 }
+
+
+
                 DownloadUtil.download(url, path, new DownloadListener() {
                     @Override
                     public void onStart() {
@@ -60,9 +82,7 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
 
                     @Override
                     public void onProgress(int progress) {
-                        final int text = progress;
-                        bar.setProgress(progress);
-                        textView.setText(text + "%");
+
 
                     }
 
@@ -77,7 +97,7 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
                         Toast.makeText(Download.this, errorInfo, Toast.LENGTH_LONG).show();
 
                     }
-                });
+                },handler);
             }
         });
 
