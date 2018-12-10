@@ -58,36 +58,41 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
 
                     @Override
                     public void onFail(String errorInfo) {
-                        Toast.makeText(Download.this, "errorInfo", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Download.this, errorInfo, Toast.LENGTH_LONG).show();
 
                     }
                 });
             }
         });
 
-
-//        new Thread(){
-//            @Override
-//            public void run() {
-//                int i=0;
-//                while(i<100){
-//                    i++;
-//                    try {
-//                        Thread.sleep(80);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    final int j=i;
-//                    bar.setProgress(i);
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            textView.setText(j+"%");
-//                        }
-//                    });
-//                }
-//            }
-//        }.start();
+        test =findViewById(R.id.test);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(){
+                    @Override
+                    public void run() {
+                        int i=0;
+                        while(i<100){
+                            i++;
+                            try {
+                                Thread.sleep(80);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            final int j=i;
+                            bar.setProgress(i);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    textView.setText(j+"%");
+                                }
+                            });
+                        }
+                    }
+                }.start();
+            }
+        });
 
 
     }
