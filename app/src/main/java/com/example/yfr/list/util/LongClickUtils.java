@@ -1,4 +1,4 @@
-package com.example.yfr.list;
+package com.example.yfr.list.util;
 
 import android.os.Handler;
 import android.view.MotionEvent;

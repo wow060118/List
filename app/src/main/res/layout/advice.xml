@@ -19,6 +19,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp" />
 
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -29,6 +30,7 @@
             android:background="#EAEAEA" />
 
         <RadioGroup
+            android:id="@+id/radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -92,7 +94,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-
             android:layout_below="@+id/advice_text"
             android:layout_alignParentStart="true"
             android:layout_marginStart="0dp"
@@ -118,7 +119,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-
             android:layout_below="@+id/advice_text"
             android:background="#EAEAEA" />
 
@@ -136,7 +136,9 @@
             android:padding="15dp"
             android:textColor="#000000"
             android:textColorHint="#9ca4a9"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:singleLine="true"/>
 
         <View
             android:layout_width="match_parent"

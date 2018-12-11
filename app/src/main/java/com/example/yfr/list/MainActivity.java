@@ -31,6 +31,7 @@ import com.example.yfr.list.db.DaoMaster;
 import com.example.yfr.list.db.DaoSession;
 import com.example.yfr.list.db.Entity;
 import com.example.yfr.list.db.EntityDao;
+import com.example.yfr.list.util.LongClickUtils;
 import com.example.yfr.list.util.SystemUtil;
 import com.google.common.collect.Lists;
 
@@ -58,11 +59,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initDataBase();
         initData();
 
-        String TAG = "系统参数：";
-        Log.e(TAG, "手机厂商：" + SystemUtil.getDeviceBrand());
-        Log.e(TAG, "手机型号：" + SystemUtil.getSystemModel());
-        Log.e(TAG, "手机当前系统语言：" + SystemUtil.getSystemLanguage());
-        Log.e(TAG, "Android系统版本号：" + SystemUtil.getSystemVersion());
+//        String TAG = "系统参数：";
+//        Log.e(TAG, "手机厂商：" + SystemUtil.getDeviceBrand());
+//        Log.e(TAG, "手机型号：" + SystemUtil.getSystemModel());
+//        Log.e(TAG, "手机当前系统语言：" + SystemUtil.getSystemLanguage());
+//        Log.e(TAG, "Android系统版本号：" + SystemUtil.getSystemVersion());
 
 
 
@@ -164,6 +165,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         list = Lists.newArrayList();
         for (int i = 0; i < 10; i++) {
             list.add(i + "");
+        }
+
+        Intent intent = getIntent();
+        if(intent!=null) {
+            //获取传递的值
+            String str = intent.getStringExtra("data");
+            //设置值
+            Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG).show();
         }
 
     }
