@@ -31,12 +31,10 @@ public class DownloadUtil {
 
 //    static final String real="20140509/4746986_145156378323_2.jpg";
     static final String real = "master.zip";
+//    static final String real="android-studio-ide-181.5014246-windows.exe";
     public static void download(final String url, final String path, final DownloadListener downloadListener, final Handler handler) {
 
         System.out.println("start   ");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
                 Retrofit retrofit = new Retrofit.Builder()
                         //这个就是converterFactory 数据分析器
                         .addConverterFactory(GsonConverterFactory.create())
@@ -49,11 +47,17 @@ public class DownloadUtil {
                 Call<ResponseBody> news = dApi.down(real);
                 news.enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call,  Response<ResponseBody> response) {
+                    public void onResponse(Call<ResponseBody> call, final Response<ResponseBody> response) {
 //                        ResponseBody body = response.body();
 //                        System.out.println(call);
 //                        System.out.println("onResponse:   ="+ JSON.toJSONString(response)+"    body:"+body);
-                        writeResponseToDisk(path,response,downloadListener,handler);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                writeResponseToDisk(path,response,downloadListener,handler);
+                            }
+                        }).start();
+
 
                     }
 
@@ -63,8 +67,6 @@ public class DownloadUtil {
 
                     }
                 });
-            }
-        }).run();
         System.out.println("end   ");
 
     }
@@ -79,7 +81,7 @@ public class DownloadUtil {
     //将输入流写入文件
     private static void writeFileFromIS(String path, InputStream is, final long totalLength, final DownloadListener downloadListener, final Handler handler) {
         //开始下载
-        downloadListener.onStart();
+//        downloadListener.onStart();
 //        System.out.println("++++++"+path+"    ");
         File file = new File(path);
         //创建文件
@@ -134,7 +136,7 @@ public class DownloadUtil {
 
             }
             //下载完成，并返回保存的文件路径
-            downloadListener.onFinish(newFile.getAbsolutePath());
+//            downloadListener.onFinish(newFile.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
             downloadListener.onFail("IOException");

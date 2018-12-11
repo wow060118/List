@@ -88,4 +88,16 @@
         android:onClick="onClick"
         android:text="下载" />
 
+    <Button
+        android:id="@+id/advice"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="321dp"
+        android:onClick="onClick"
+        android:text="意见反馈" />
+
+
 </RelativeLayout>

@@ -56,6 +56,7 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
             public void onClick(View v) {
 //                String url="http://pic41.nipic.com/";
                 String url="https://github.com/wow060118/petreact/archive/";
+//                String url="https://dl.google.com/dl/android/studio/install/3.2.0.26/";
                 String path = Environment.getExternalStorageDirectory() + "/DownloadFileTwo";
 
                 final int REQUEST_EXTERNAL_STORAGE = 1;

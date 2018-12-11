@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/titleLayout"
+            layout="@layout/title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+
+            android:layout_below="@+id/button_bug"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="-233dp"
+            android:background="#EAEAEA" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="50dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/button_bug"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginTop="0dp"
+                    android:text="故障" />
+
+                <RadioButton
+                    android:id="@+id/button_advice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="98dp"
+                    android:layout_marginLeft="98dp"
+                    android:layout_marginTop="0dp"
+                    android:text="建议" />
+
+                <RadioButton
+                    android:id="@+id/button_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="170dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginRight="0dp"
+                    android:text="账号问题" />
+
+                <RadioButton
+                    android:id="@+id/button_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginRight="24dp"
+                    android:text="其他问题" />
+            </RelativeLayout>
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+
+            android:layout_below="@+id/advice_text"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="-200dp"
+            android:background="#EAEAEA" />
+
+        <EditText
+            android:id="@+id/advice_text"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/titleLayout"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="33dp"
+            android:background="@android:color/transparent"
+            android:gravity="top|left"
+            android:hint="请详细描述您所遇到的问题或给我们的建议"
+            android:padding="15dp"
+            android:textColor="#000000"
+            android:textColorHint="#9ca4a9"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+
+            android:layout_below="@+id/advice_text"
+            android:background="#EAEAEA" />
+
+        <EditText
+            android:id="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleLayout"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="233dp"
+            android:background="@android:color/transparent"
+            android:gravity="top|left"
+            android:hint="联系方式（手机、邮箱或QQ）"
+            android:padding="15dp"
+            android:textColor="#000000"
+            android:textColorHint="#9ca4a9"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+
+            android:layout_below="@+id/contact"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="-1dp"
+            android:background="#EAEAEA" />
+
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="188dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="102dp"
+            android:layout_marginBottom="67dp"
+            android:background="@drawable/buttonshape"
+            android:gravity="center"
+            android:text="提交"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:clickable="false"/>
+
+        <TextView
+            android:id="@+id/emailText"
+            android:layout_width="75dp"
+            android:layout_height="33dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="95dp"
+            android:layout_marginLeft="95dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:text="客服邮箱："
+            />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="146dp"
+            android:layout_height="33dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="150dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:textColor="#3F51B5"
+            android:text="xxxxx@momo.com" />
+    </RelativeLayout>
+</FrameLayout>

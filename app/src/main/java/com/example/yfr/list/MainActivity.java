@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -25,10 +26,12 @@ import android.widget.Toast;
 
 
 import com.alibaba.fastjson.JSON;
+import com.example.yfr.list.advice.AdviceActivity;
 import com.example.yfr.list.db.DaoMaster;
 import com.example.yfr.list.db.DaoSession;
 import com.example.yfr.list.db.Entity;
 import com.example.yfr.list.db.EntityDao;
+import com.example.yfr.list.util.SystemUtil;
 import com.google.common.collect.Lists;
 
 import org.greenrobot.greendao.database.Database;
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView recyclerView;
     private List<String> list;
     MyAdapter myAdapter;
-    Button add,remove,databtn,readBtn,download;
+    Button add,remove,databtn,readBtn,download,advice;
     private ImageView imageView;
     private ImageView bImageView;
 
@@ -55,10 +58,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initDataBase();
         initData();
 
+        String TAG = "系统参数：";
+        Log.e(TAG, "手机厂商：" + SystemUtil.getDeviceBrand());
+        Log.e(TAG, "手机型号：" + SystemUtil.getSystemModel());
+        Log.e(TAG, "手机当前系统语言：" + SystemUtil.getSystemLanguage());
+        Log.e(TAG, "Android系统版本号：" + SystemUtil.getSystemVersion());
+
+
+
         recyclerView = findViewById(R.id.recyclerView);
 
 //        System.out.println(JSON.toJSONString(list));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        //设置分割线
+        recyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,DividerItemDecoration.VERTICAL));
         //设置布局管理器
         recyclerView.setLayoutManager(layoutManager);
         //设置为垂直布局，这也是默认的
@@ -83,6 +96,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+
+        advice =findViewById(R.id.advice);
+        advice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(MainActivity.this,AdviceActivity.class);
+                startActivity(i);
+            }
+        });
+
         imageView = findViewById(R.id.img);
 
         bImageView = getBIimageView();
@@ -217,6 +240,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
             MyViewHolder holder = new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item, viewGroup, false));
+
             return holder;
         }
 
