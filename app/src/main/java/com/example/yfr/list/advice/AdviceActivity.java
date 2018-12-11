@@ -188,7 +188,7 @@ public class AdviceActivity extends AppCompatActivity {
                 adviceEntity.setPhoneModle(SystemUtil.getSystemModel());
                 Log.i("advice", JSON.toJSONString(adviceEntity));
 
-                //创建意图对象
+                //传递信息 用intent的extra
                 Intent i = new Intent(AdviceActivity.this, MainActivity.class);
                 i.putExtra("data", "反馈已提交");
                 startActivity(i);

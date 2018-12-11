@@ -167,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             list.add(i + "");
         }
 
+
         Intent intent = getIntent();
         if(intent!=null) {
             //获取传递的值
