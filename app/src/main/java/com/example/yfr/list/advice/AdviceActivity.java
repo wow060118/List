@@ -29,6 +29,10 @@ import com.example.yfr.list.entity.AdviceEntity;
 import com.example.yfr.list.entity.RadioEntity;
 import com.example.yfr.list.util.SystemUtil;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 public class AdviceActivity extends AppCompatActivity {
 
     private TextView email,title;
@@ -129,11 +133,8 @@ public class AdviceActivity extends AppCompatActivity {
                 adviceEntity.setVersion(SystemUtil.getSystemVersion());
                 adviceEntity.setPhoneModle(SystemUtil.getSystemModel());
                 Log.i("advice", JSON.toJSONString(adviceEntity));
-
-                //传递信息 用intent的extra
-                Intent i = new Intent(AdviceActivity.this, MainActivity.class);
-                i.putExtra("data", "反馈已提交");
-                startActivity(i);
+                EventBus.getDefault().post("反馈已提交");
+                finish();
             }
         });
         submit.setClickable(false);
@@ -149,6 +150,7 @@ public class AdviceActivity extends AppCompatActivity {
     }
 
     private void init() {
+//        EventBus.getDefault().register(this);
         radioEntity = new RadioEntity();
         radioEntity.setChecked(false);
         radioEntity.setAdviceEnum(AdviceEnum.NONE);
@@ -188,4 +190,8 @@ public class AdviceActivity extends AppCompatActivity {
         judgeSubmitClick();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBus(String msg){
+        Log.i("this is advice","msg");
+    }
 }

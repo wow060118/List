@@ -37,6 +37,9 @@ import com.example.yfr.list.util.SystemUtil;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.greenrobot.greendao.database.Database;
 
 import java.io.InputStream;
@@ -99,11 +102,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
+        EventBus.getDefault().register(this);
         advice =findViewById(R.id.advice);
         advice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i =new Intent(MainActivity.this,AdviceActivity.class);
                 startActivity(i);
             }
@@ -176,13 +180,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-        Intent intent = getIntent();
-            //获取传递的值
-            String str = intent.getStringExtra("data");
-            if(!Strings.isNullOrEmpty(str)) {
-                //设置值
-                Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG).show();
-            }
+//        Intent intent = getIntent();
+//            //获取传递的值
+//            String str = intent.getStringExtra("data");
+//            if(!Strings.isNullOrEmpty(str)) {
+//                //设置值
+//                Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG).show();
+//            }
 
     }
 
@@ -290,8 +294,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         entityDao.createTable(database,true);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBus(String msg){
+        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+    }
+
     public DaoSession getDaoSession(){
         return daoSession;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //解除注册
+        EventBus.getDefault().unregister(this);
     }
 
 }

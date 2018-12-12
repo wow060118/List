@@ -14,6 +14,8 @@ import com.example.yfr.list.entity.SetUpEntity;
 import com.example.yfr.list.util.CacheUtil;
 import com.google.common.collect.Lists;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 public class SetUpActivity extends AppCompatActivity {
@@ -28,7 +30,7 @@ public class SetUpActivity extends AppCompatActivity {
         setContentView(R.layout.new_setup);
         initData();
 
-
+//        EventBus.getDefault().post("hello11111111111111111");
         recyclerView = findViewById(R.id.setup_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 //        //设置分割线
