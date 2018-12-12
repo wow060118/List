@@ -91,22 +91,7 @@ public class AdviceActivity extends AppCompatActivity {
         radioButtonAdvice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (radioEntity.isChecked() && radioEntity.getAdviceEnum().name() == AdviceEnum.ADVICE.name()) {
-                    radioEntity.getRadioButton().setChecked(false);
-                    radioEntity.setAdviceEnum(AdviceEnum.NONE);
-                    radioEntity.setRadioButton(null);
-                    radioEntity.setChecked(false);
-                } else if (radioEntity.isChecked() && radioEntity.getAdviceEnum().name() != AdviceEnum.ADVICE.name()) {
-                    radioEntity.getRadioButton().setChecked(false);
-                    radioEntity.setRadioButton(radioButtonAdvice);
-                    radioEntity.setAdviceEnum(AdviceEnum.ADVICE);
-                } else {
-                    radioEntity.setChecked(true);
-                    radioEntity.setAdviceEnum(AdviceEnum.ADVICE);
-                    radioEntity.setRadioButton(radioButtonAdvice);
-                }
-                judgeClick();
+                judgeChecked(radioButtonAdvice,AdviceEnum.ADVICE);
             }
         });
 
@@ -114,44 +99,14 @@ public class AdviceActivity extends AppCompatActivity {
         radioButtonBug.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (radioEntity.isChecked() && radioEntity.getAdviceEnum().name() == AdviceEnum.BUG.name()) {
-                    radioEntity.getRadioButton().setChecked(false);
-                    radioEntity.setAdviceEnum(AdviceEnum.NONE);
-                    radioEntity.setRadioButton(null);
-                    radioEntity.setChecked(false);
-                } else if (radioEntity.isChecked() && radioEntity.getAdviceEnum().name() != AdviceEnum.BUG.name()) {
-                    radioEntity.getRadioButton().setChecked(false);
-                    radioEntity.setRadioButton(radioButtonBug);
-                    radioEntity.setAdviceEnum(AdviceEnum.BUG);
-                } else {
-                    radioEntity.setChecked(true);
-                    radioEntity.setAdviceEnum(AdviceEnum.BUG);
-                    radioEntity.setRadioButton(radioButtonBug);
-                }
-                judgeClick();
+                  judgeChecked(radioButtonBug,AdviceEnum.BUG);
             }
         });
         radioButtonOther = findViewById(R.id.button_other);
         radioButtonOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (radioEntity.isChecked() && radioEntity.getAdviceEnum().name() == AdviceEnum.OTHER.name()) {
-                    radioEntity.getRadioButton().setChecked(false);
-                    radioEntity.setAdviceEnum(AdviceEnum.NONE);
-                    radioEntity.setRadioButton(null);
-                    radioEntity.setChecked(false);
-                } else if (radioEntity.isChecked() && radioEntity.getAdviceEnum().name() != AdviceEnum.OTHER.name()) {
-                    radioEntity.getRadioButton().setChecked(false);
-                    radioEntity.setRadioButton(radioButtonOther);
-                    radioEntity.setAdviceEnum(AdviceEnum.OTHER);
-                } else {
-                    radioEntity.setChecked(true);
-                    radioEntity.setAdviceEnum(AdviceEnum.OTHER);
-                    radioEntity.setRadioButton(radioButtonOther);
-                }
-                judgeClick();
+                judgeChecked(radioButtonOther,AdviceEnum.OTHER);
             }
         });
 
@@ -159,21 +114,7 @@ public class AdviceActivity extends AppCompatActivity {
         radioButtonUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (radioEntity.isChecked() && radioEntity.getAdviceEnum().name() == AdviceEnum.USER.name()) {
-                    radioEntity.getRadioButton().setChecked(false);
-                    radioEntity.setAdviceEnum(AdviceEnum.NONE);
-                    radioEntity.setRadioButton(null);
-                    radioEntity.setChecked(false);
-                } else if (radioEntity.isChecked() && radioEntity.getAdviceEnum().name() != AdviceEnum.USER.name()) {
-                    radioEntity.getRadioButton().setChecked(false);
-                    radioEntity.setRadioButton(radioButtonUser);
-                    radioEntity.setAdviceEnum(AdviceEnum.BUG);
-                } else {
-                    radioEntity.setChecked(true);
-                    radioEntity.setAdviceEnum(AdviceEnum.BUG);
-                    radioEntity.setRadioButton(radioButtonUser);
-                }
-                judgeClick();
+                judgeChecked(radioButtonUser,AdviceEnum.USER);
 
             }
         });
@@ -229,5 +170,22 @@ public class AdviceActivity extends AppCompatActivity {
         }
     }
 
+    private void judgeChecked(RadioButton r,AdviceEnum a){
+        if (radioEntity.isChecked() && radioEntity.getAdviceEnum().name() == a.name()) {
+            radioEntity.getRadioButton().setChecked(false);
+            radioEntity.setAdviceEnum(AdviceEnum.NONE);
+            radioEntity.setRadioButton(null);
+            radioEntity.setChecked(false);
+        } else if (radioEntity.isChecked() && radioEntity.getAdviceEnum().name() != a.name()) {
+            radioEntity.getRadioButton().setChecked(false);
+            radioEntity.setRadioButton(r);
+            radioEntity.setAdviceEnum(a);
+        } else {
+            radioEntity.setChecked(true);
+            radioEntity.setAdviceEnum(a);
+            radioEntity.setRadioButton(r);
+        }
+        judgeClick();
+    }
 
 }
