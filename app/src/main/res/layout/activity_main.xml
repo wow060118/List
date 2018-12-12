@@ -106,7 +106,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="147dp"
-        android:layout_marginRight="147dp" />
+        android:layout_marginRight="147dp"
+        android:checked="true"/>
 
 
 </RelativeLayout>

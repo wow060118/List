@@ -31,7 +31,7 @@ import com.example.yfr.list.util.SystemUtil;
 
 public class AdviceActivity extends AppCompatActivity {
 
-    private TextView email;
+    private TextView email,title;
     private RadioButton radioButtonBug, radioButtonAdvice, radioButtonOther, radioButtonUser;
     private EditText adviceText, contactText;
     private Button submit;
@@ -203,6 +203,8 @@ public class AdviceActivity extends AppCompatActivity {
                 finish();
             }
         });
+        title=findViewById(R.id.titleView);
+        title.setText("意见反馈");
     }
 
     private void init() {
