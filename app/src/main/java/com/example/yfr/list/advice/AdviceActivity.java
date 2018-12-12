@@ -76,7 +76,7 @@ public class AdviceActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                judgeClick();
+                judgeSubmitClick();
                 advice = adviceText.getText().toString();
                 if (advice.length() > 1000) {
                     Toast.makeText(AdviceActivity.this, "超过1000字", Toast.LENGTH_LONG).show();
@@ -91,7 +91,7 @@ public class AdviceActivity extends AppCompatActivity {
         radioButtonAdvice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                judgeChecked(radioButtonAdvice,AdviceEnum.ADVICE);
+                judgeAdviceTypeClick(radioButtonAdvice,AdviceEnum.ADVICE);
             }
         });
 
@@ -99,14 +99,14 @@ public class AdviceActivity extends AppCompatActivity {
         radioButtonBug.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                  judgeChecked(radioButtonBug,AdviceEnum.BUG);
+                judgeAdviceTypeClick(radioButtonBug,AdviceEnum.BUG);
             }
         });
         radioButtonOther = findViewById(R.id.button_other);
         radioButtonOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                judgeChecked(radioButtonOther,AdviceEnum.OTHER);
+                judgeAdviceTypeClick(radioButtonOther,AdviceEnum.OTHER);
             }
         });
 
@@ -114,7 +114,7 @@ public class AdviceActivity extends AppCompatActivity {
         radioButtonUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                judgeChecked(radioButtonUser,AdviceEnum.USER);
+                judgeAdviceTypeClick(radioButtonUser,AdviceEnum.USER);
 
             }
         });
@@ -158,7 +158,7 @@ public class AdviceActivity extends AppCompatActivity {
     }
 
 
-    private void judgeClick() {
+    private void judgeSubmitClick() {
         advice = adviceText.getText().toString();
 
         if (advice.length() > 0 && radioEntity.getAdviceEnum().name() != AdviceEnum.NONE.name()) {
@@ -170,7 +170,7 @@ public class AdviceActivity extends AppCompatActivity {
         }
     }
 
-    private void judgeChecked(RadioButton r,AdviceEnum a){
+    private void judgeAdviceTypeClick(RadioButton r,AdviceEnum a){
         if (radioEntity.isChecked() && radioEntity.getAdviceEnum().name() == a.name()) {
             radioEntity.getRadioButton().setChecked(false);
             radioEntity.setAdviceEnum(AdviceEnum.NONE);
@@ -185,7 +185,7 @@ public class AdviceActivity extends AppCompatActivity {
             radioEntity.setAdviceEnum(a);
             radioEntity.setRadioButton(r);
         }
-        judgeClick();
+        judgeSubmitClick();
     }
 
 }

@@ -31,6 +31,7 @@ import com.example.yfr.list.db.DaoMaster;
 import com.example.yfr.list.db.DaoSession;
 import com.example.yfr.list.db.Entity;
 import com.example.yfr.list.db.EntityDao;
+import com.example.yfr.list.setup.SetUpActivity;
 import com.example.yfr.list.util.LongClickUtils;
 import com.example.yfr.list.util.SystemUtil;
 import com.google.common.base.Strings;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView recyclerView;
     private List<String> list;
     MyAdapter myAdapter;
-    Button add,remove,databtn,readBtn,download,advice;
+    Button add,remove,databtn,readBtn,download,advice,setup;
     private ImageView imageView;
     private ImageView bImageView;
 
@@ -154,6 +155,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dialog.show();
                 Toast.makeText(MainActivity.this, "这是一个短点击事件", Toast.LENGTH_LONG).show();
             }
+        });
+
+        setup = findViewById(R.id.setup);
+        setup.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this,SetUpActivity.class);
+            startActivity(i);
         });
 
     }

@@ -8,8 +8,7 @@
         android:id="@+id/titleLayout"
         layout="@layout/title"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="0dp" />
+        android:layout_height="50dp" />
 
     <View
         android:layout_width="match_parent"
@@ -39,94 +38,19 @@
         android:layout_marginTop="100dp"
         android:background="#9ca4a9" />
 
-
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_marginTop="120dp"
-        android:background="#9ca4a9" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="120dp"
-        android:paddingLeft="40dp"
-        android:paddingTop="15dp"
-        android:text="隐私协议"
-        android:textColor="#000000"
-        android:textSize="15sp" />
-
-    <ImageView
-        android:layout_width="48dp"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
         android:layout_marginTop="130dp"
-        android:layout_marginRight="30dp"
-        android:src="@mipmap/common_icon_right_arrow" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="170dp"
         android:background="#9ca4a9" />
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/setup_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="170dp"
-        android:paddingLeft="40dp"
-        android:paddingTop="15dp"
-        android:text="用户协议"
-        android:textColor="#000000"
-        android:textSize="15sp" />
-
-    <ImageView
-        android:layout_width="48dp"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="180dp"
-        android:layout_marginRight="30dp"
-        android:src="@mipmap/common_icon_right_arrow" />
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="220dp"
-        android:background="#9ca4a9" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:paddingLeft="40dp"
-        android:paddingTop="15dp"
-        android:layout_marginTop="220dp"
-        android:text="缓存清理"
-        android:textColor="#000000"
-        android:textSize="15sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="275dp"
-        android:layout_marginTop="235dp"
-        android:text="0.0M"
-        android:textColor="#000000"
-        android:textSize="15sp" />
+        android:layout_marginTop="130dp">
 
-    <ImageView
-        android:layout_width="48dp"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="230dp"
-        android:layout_marginRight="30dp"
-        android:src="@mipmap/common_icon_right_arrow" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="270dp"
-        android:background="#9ca4a9" />
+    </android.support.v7.widget.RecyclerView>
 
     <View
         android:layout_width="match_parent"
@@ -148,6 +72,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="60dp"
         android:background="#9ca4a9" />
@@ -156,6 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
         android:gravity="center"
         android:text="app version 1.0"
         android:textColor="#000000"
