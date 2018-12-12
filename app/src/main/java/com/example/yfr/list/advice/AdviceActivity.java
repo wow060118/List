@@ -61,7 +61,8 @@ public class AdviceActivity extends AppCompatActivity {
         adviceText = findViewById(R.id.advice_text);
         contactText = findViewById(R.id.contact);
 
-        submit = findViewById(R.id.btn_submit);
+
+
         adviceText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -194,7 +195,7 @@ public class AdviceActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        submit.setClickable(false);
         backIcon = findViewById(R.id.backIcon);
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,7 +209,9 @@ public class AdviceActivity extends AppCompatActivity {
         radioEntity = new RadioEntity();
         radioEntity.setChecked(false);
         radioEntity.setAdviceEnum(AdviceEnum.NONE);
+        submit = findViewById(R.id.btn_submit);
 
+        Log.i("click: ",submit.isClickable()+"");
     }
 
 

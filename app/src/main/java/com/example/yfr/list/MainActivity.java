@@ -33,6 +33,7 @@ import com.example.yfr.list.db.Entity;
 import com.example.yfr.list.db.EntityDao;
 import com.example.yfr.list.util.LongClickUtils;
 import com.example.yfr.list.util.SystemUtil;
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
 import org.greenrobot.greendao.database.Database;
@@ -169,12 +170,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         Intent intent = getIntent();
-        if(intent!=null) {
             //获取传递的值
             String str = intent.getStringExtra("data");
-            //设置值
-            Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG).show();
-        }
+            if(!Strings.isNullOrEmpty(str)) {
+                //设置值
+                Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG).show();
+            }
 
     }
 
