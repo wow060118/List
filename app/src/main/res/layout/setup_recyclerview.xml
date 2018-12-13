@@ -6,10 +6,10 @@
 
     <TextView
         android:id="@+id/setup_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingTop="15dp"
+        android:paddingLeft="40dp"
         android:text="隐私协议"
         android:textColor="#000000"
         android:textSize="15sp" />

@@ -9,9 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.yfr.list.R;
+import com.example.yfr.list.entity.EventBusMsg;
 import com.example.yfr.list.entity.SetUpEntity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -50,6 +54,12 @@ public class SetUpAdapter extends RecyclerView.Adapter<SetUpAdapter.SetUpViewHol
             setUpViewHolder.cache.setText(s.getCache());
             setUpViewHolder.cache.setVisibility(View.VISIBLE);
         }
+        setUpViewHolder.title.setOnClickListener(v -> {
+            EventBusMsg eventBusMsg=new EventBusMsg();
+            eventBusMsg.setType(1);
+            eventBusMsg.setMsg(s.getTitle());
+            EventBus.getDefault().post(eventBusMsg);
+        });
     }
 
     @Override
