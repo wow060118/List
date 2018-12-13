@@ -27,6 +27,7 @@ import com.example.yfr.list.MainActivity;
 import com.example.yfr.list.R;
 import com.example.yfr.list.entity.AdviceEntity;
 import com.example.yfr.list.entity.RadioEntity;
+import com.example.yfr.list.setup.SetUpActivity;
 import com.example.yfr.list.util.SystemUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -134,6 +135,8 @@ public class AdviceActivity extends AppCompatActivity {
                 adviceEntity.setPhoneModle(SystemUtil.getSystemModel());
                 Log.i("advice", JSON.toJSONString(adviceEntity));
                 EventBus.getDefault().post("反馈已提交");
+//                Intent i = new Intent(AdviceActivity.this,SetUpActivity.class);
+//                startActivity(i);
                 finish();
             }
         });

@@ -18,6 +18,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yfr.list.MainActivity;
@@ -44,7 +45,7 @@ public class SetUpActivity extends AppCompatActivity {
     private boolean notifiIsEnabled;
     public static final String SETTINGS_ACTION = "android.settings.APPLICATION_DETAILS_SETTINGS";
     private NotificationManagerCompat notification;
-
+    private TextView logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +126,13 @@ public class SetUpActivity extends AppCompatActivity {
 //                    }
 //                }).start();
             }
+        });
+        logout= findViewById(R.id.logout);
+        logout.setOnClickListener(v ->{
+           Intent i =new Intent(SetUpActivity.this,MainActivity.class);
+           i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+           startActivity(i);
+
         });
     }
 
