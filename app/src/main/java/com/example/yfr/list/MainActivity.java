@@ -19,9 +19,12 @@ import android.view.LayoutInflater;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 
@@ -33,10 +36,13 @@ import com.example.yfr.list.db.Entity;
 import com.example.yfr.list.db.EntityDao;
 import com.example.yfr.list.setup.SetUpActivity;
 import com.example.yfr.list.test.SimpleAdapterActivity;
+import com.example.yfr.list.test.User;
+import com.example.yfr.list.test.UserAdapter;
 import com.example.yfr.list.util.LongClickUtils;
 import com.example.yfr.list.util.SystemUtil;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -45,8 +51,9 @@ import org.greenrobot.greendao.database.Database;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemClickListener {
     private RecyclerView recyclerView;
     private List<String> list;
     MyAdapter myAdapter;
@@ -57,6 +64,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Dialog dialog;
 
     private DaoSession daoSession;
+
+
+    private String[] names = new String[]{"A", "B", "C"};
+    private String[] says = new String[]{"AAAAAAAA", "BBBBBBBB", "CCCCCCCC"};
+    private int[] imgIds = new int[]{R.mipmap.common_icon_black_back, R.mipmap.common_icon_right_arrow, R.mipmap.next_icon};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +182,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
         });
 
+        List<Map<String, Object>> listitem = Lists.newArrayList();
+        for (int i = 0; i < names.length; i++) {
+            Map<String, Object> showitem = Maps.newHashMap();
+            showitem.put("touxiang", imgIds[i]);
+            showitem.put("name", names[i]);
+            showitem.put("says", says[i]);
+            listitem.add(showitem);
+        }
+
+//        //创建一个simpleAdapter
+//        SimpleAdapter myAdapter = new SimpleAdapter(this, listitem, R.layout.simple_adapter_layout, new String[]{"touxiang", "name", "says"}, new int[]{R.id.imgtou, R.id.name, R.id.says});
+        ListView listView = (ListView) findViewById(R.id.list_test);
+        List<User>  users=Lists.newArrayList();
+        users.add(new User("AAAAA","AAAAAAAAAA",R.mipmap.common_icon_black_back));
+        users.add(new User("BBBBB","BBBBBBBBBB",R.mipmap.common_icon_right_arrow));
+        users.add(new User("CCCCC","CCCCCCCCCC",R.mipmap.next_icon));
+        UserAdapter userAdapter=new UserAdapter(users,MainActivity.this);
+        listView.setAdapter(userAdapter);
+        listView.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(MainActivity.this,"你点击了第" + position + "项",Toast.LENGTH_SHORT).show();
     }
 
     private void initDataBase() {
