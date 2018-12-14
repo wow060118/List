@@ -34,6 +34,7 @@ import com.example.yfr.list.db.DaoMaster;
 import com.example.yfr.list.db.DaoSession;
 import com.example.yfr.list.db.Entity;
 import com.example.yfr.list.db.EntityDao;
+import com.example.yfr.list.imagefall.ImageFallActivity;
 import com.example.yfr.list.setup.SetUpActivity;
 import com.example.yfr.list.test.SimpleAdapterActivity;
 import com.example.yfr.list.test.User;
@@ -171,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
 //                dialog.show();
 //                Toast.makeText(MainActivity.this, "这是一个短点击事件", Toast.LENGTH_LONG).show();
-                Intent i =new Intent(MainActivity.this,SimpleAdapterActivity.class);
+                Intent i =new Intent(MainActivity.this,ImageFallActivity.class);
                 startActivity(i);
             }
         });
