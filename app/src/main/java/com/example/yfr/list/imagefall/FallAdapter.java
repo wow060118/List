@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.yfr.list.R;
@@ -18,15 +19,24 @@ public class FallAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     //主要布局
     public static final int view_Normal = 1;
     //是否隐藏
-    public boolean isLoadMore = false;
+    public boolean hide;
 
 
-    public FallAdapter(Context fContext, LinkedList pics) {
+    public FallAdapter(Context fContext, LinkedList pics,boolean hide) {
         this.fContext = fContext;
         this.pics = pics;
+        this.hide = hide;
     }
 
     public FallAdapter() {
+    }
+
+    public boolean isHide() {
+        return hide;
+    }
+
+    public void setHide(boolean hide) {
+        this.hide = hide;
     }
 
     @NonNull
@@ -44,7 +54,19 @@ public class FallAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         if (viewHolder instanceof FallHolder) {
-            bindFallView((FallHolder) viewHolder,i);
+            ((FallHolder) viewHolder).pic.setImageResource(pics.get(i).getPic());
+            System.out.println(hide);
+            if(hide){
+                ((FallHolder) viewHolder).remove.setVisibility(View.INVISIBLE);
+            }else{
+                ((FallHolder) viewHolder).remove.setVisibility(View.VISIBLE);
+            }
+            ((FallHolder) viewHolder).remove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeItem(i);
+                }
+            });
         }
 //        else if(viewHolder instanceof FootViewHolder){
 //            bindFootView((FootViewHolder) viewHolder,i);
@@ -52,15 +74,20 @@ public class FallAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
+    private void removeItem(int i) {
+        pics.remove(i);
+        notifyDataSetChanged();
+    }
+
 //    private void bindFootView(FootViewHolder holder,int i) {
 //        FootViewHolder footViewHolder=holder;
 //        footViewHolder.textView.setText("上拉刷新");
 //    }
 
-
+    //复杂数据绑定
     private void bindFallView(FallHolder holder, int position) {
         FallHolder fallHolder = holder;
-        fallHolder.pic.setImageResource(pics.get(position).getPic());
+
     }
 
 
