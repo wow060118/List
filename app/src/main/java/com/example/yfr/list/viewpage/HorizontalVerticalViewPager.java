@@ -4,17 +4,16 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.yfr.list.R;
 
 
-/**
- * Created by Administrator on 2016/8/29 0029.
- */
 public class HorizontalVerticalViewPager extends ViewPager {
 
+    private GestureDetector mGestureDetector;
     private boolean isVertical = false;
 
     public HorizontalVerticalViewPager(Context context) {
@@ -45,6 +44,15 @@ public class HorizontalVerticalViewPager extends ViewPager {
         setPageTransformer(true, new HorizontalVerticalPageTransformer());
         // The easiest way to get rid of the over scroll drawing that happens on the left and right
         setOverScrollMode(OVER_SCROLL_NEVER);
+
+        mGestureDetector = new GestureDetector(getContext(), new LearnGestureListener());
+        //为fragment添加OnTouchListener监听器
+        this.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return mGestureDetector.onTouchEvent(event);
+            }
+        });
     }
 
 
@@ -151,4 +159,30 @@ public class HorizontalVerticalViewPager extends ViewPager {
             return super.onTouchEvent(ev);
         }
     }
+
+    private class LearnGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private int verticalMinistance = 100;            //水平最小识别距离
+        private int minVelocity = 10;
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if (e1.getX() - e2.getX() > verticalMinistance && Math.abs(velocityX) > minVelocity) {
+                isVertical = false;
+            } else if (e2.getX() - e1.getX() > verticalMinistance && Math.abs(velocityX) > minVelocity) {
+                isVertical = false;
+            } else if (e1.getY() - e2.getY() > verticalMinistance && Math.abs(velocityY) > minVelocity) {
+                isVertical = true;
+            } else if (e2.getY() - e1.getY() > verticalMinistance && Math.abs(velocityY) > minVelocity) {
+                isVertical = true;
+            }
+            return false;
+        }
+
+        //此方法必须重写且返回真，否则onFling不起效
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+    }
+
 }

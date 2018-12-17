@@ -3,10 +3,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.example.yfr.list.viewpage.VerticalViewPager
+    <com.example.yfr.list.viewpage.HorizontalVerticalViewPager
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/pic_view">
 
-    </com.example.yfr.list.viewpage.VerticalViewPager>
+    </com.example.yfr.list.viewpage.HorizontalVerticalViewPager>
 </RelativeLayout>

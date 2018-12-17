@@ -14,7 +14,7 @@ import java.util.List;
 public class ViewPagerActivity extends AppCompatActivity {
 
     private List<PicFragment> picFragmentList;
-    private VerticalViewPager viewPager;
+    private HorizontalVerticalViewPager viewPager;
     @Override
     protected void onCreate(Bundle startInstance) {
         super.onCreate(startInstance);
