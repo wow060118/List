@@ -1,11 +1,9 @@
 package com.example.yfr.list.viewpage;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.yfr.list.R;
@@ -16,7 +14,7 @@ import java.util.List;
 public class ViewPagerActivity extends AppCompatActivity {
 
     private List<PicFragment> picFragmentList;
-    private ViewPager viewPager;
+    private VerticalViewPager viewPager;
     @Override
     protected void onCreate(Bundle startInstance) {
         super.onCreate(startInstance);
@@ -45,7 +43,9 @@ public class ViewPagerActivity extends AppCompatActivity {
             }
         });//设置页面切换时的监听器(可选，用了之后要重写它的回调方法处理页面切换时候的事务)
         viewPager.setAdapter(new ViewPageAdapter(getSupportFragmentManager(), picFragmentList));
-        viewPager.setPageTransformer(true,new DepthPageTransformer());
+
+
+//        viewPager.setPageTransformer(true,new DepthPageTransformer());
 
 
     }
