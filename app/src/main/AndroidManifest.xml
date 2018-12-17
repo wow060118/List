@@ -57,6 +57,11 @@
             android:screenOrientation="portrait" >
 
         </activity>
+        <activity android:name=".viewpage.ViewPagerActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+
+        </activity>
     </application>
 
 </manifest>
