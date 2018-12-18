@@ -7,6 +7,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+/**
+ * 垂直的viewpager
+ *
+ */
 public class VerticalViewPager extends ViewPager {
 
     public VerticalViewPager(Context context) {

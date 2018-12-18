@@ -10,6 +10,10 @@ import android.view.View;
 
 import com.example.yfr.list.R;
 
+/**
+ *
+ * 垂直或者水平 根据操作来的
+ */
 
 public class HorizontalVerticalViewPager extends ViewPager {
 
