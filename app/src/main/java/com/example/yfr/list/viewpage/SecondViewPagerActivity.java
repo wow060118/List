@@ -12,8 +12,8 @@ import java.util.List;
 
 public class SecondViewPagerActivity extends AppCompatActivity {
 
-    private List<PicFragment> picFragmentList;
-    private HorizontalVerticalViewPager viewPager;
+    private List picFragmentList;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle startInstance) {
@@ -42,7 +42,7 @@ public class SecondViewPagerActivity extends AppCompatActivity {
 
             }
         });//设置页面切换时的监听器(可选，用了之后要重写它的回调方法处理页面切换时候的事务)
-        viewPager.setAdapter(new ViewPageAdapter(getSupportFragmentManager(), picFragmentList));
+        viewPager.setAdapter(new SecondViewPageAdapter(getSupportFragmentManager(), picFragmentList));
 
 
 //        viewPager.setPageTransformer(true,new DepthPageTransformer());
@@ -53,10 +53,10 @@ public class SecondViewPagerActivity extends AppCompatActivity {
     private void initData() {
         picFragmentList = Lists.newArrayList();
 
-        PicFragment fragment1 = new PicFragment();
-        PicFragment fragment2 = new PicFragment();
-        PicFragment fragment3 = new PicFragment();
-        PicFragment fragment4 = new PicFragment();
+        SecondPicFragment fragment1 = new SecondPicFragment();
+        SecondPicFragment fragment2 = new SecondPicFragment();
+        SecondPicFragment fragment3 = new SecondPicFragment();
+        SecondPicFragment fragment4 = new SecondPicFragment();
 
 
         Bundle bundle = new Bundle();

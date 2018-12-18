@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:id="@+id/fragment_text"
+        android:id="@+id/second_fragment_text"
         android:text="text"
         android:gravity="center"
         android:textSize="15pt"/>
@@ -17,15 +17,16 @@
         android:layout_marginTop="60dp" />
 
     <ImageView
-        android:id="@+id/fragment_pic"
+        android:id="@+id/second_fragment_pic"
         android:layout_width="match_parent"
-        android:layout_height="451dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="60dp"
         android:src="@mipmap/common_icon_right_arrow" />
 
     <com.example.yfr.list.viewpage.VerticalViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:id="@+id/second_pic_view_fragment">
     </com.example.yfr.list.viewpage.VerticalViewPager>
 

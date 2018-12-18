@@ -41,6 +41,7 @@ import com.example.yfr.list.test.User;
 import com.example.yfr.list.test.UserAdapter;
 import com.example.yfr.list.util.LongClickUtils;
 import com.example.yfr.list.util.SystemUtil;
+import com.example.yfr.list.viewpage.SecondViewPagerActivity;
 import com.example.yfr.list.viewpage.ViewPagerActivity;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView recyclerView;
     private List<String> list;
     MyAdapter myAdapter;
-    Button add,remove,databtn,readBtn,download,advice,setup,viewpage;
+    Button add,remove,databtn,readBtn,download,advice,setup,viewpage,secondpage;
     private ImageView imageView;
     private ImageView bImageView;
 
@@ -210,6 +211,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(MainActivity.this,ViewPagerActivity.class);
+                startActivity(i);
+            }
+        });
+
+        secondpage=findViewById(R.id.second_view_page);
+        secondpage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,SecondViewPagerActivity.class);
                 startActivity(i);
             }
         });
