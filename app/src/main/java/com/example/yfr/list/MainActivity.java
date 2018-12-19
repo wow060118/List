@@ -35,6 +35,8 @@ import com.example.yfr.list.db.DaoSession;
 import com.example.yfr.list.db.Entity;
 import com.example.yfr.list.db.EntityDao;
 import com.example.yfr.list.imagefall.ImageFallActivity;
+import com.example.yfr.list.imageloader.ImageLoaderAcvitity;
+import com.example.yfr.list.rxjava.RetrofitAndRxjavaAcvitity;
 import com.example.yfr.list.setup.SetUpActivity;
 import com.example.yfr.list.test.SimpleAdapterActivity;
 import com.example.yfr.list.test.User;
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView recyclerView;
     private List<String> list;
     MyAdapter myAdapter;
-    Button add,remove,databtn,readBtn,download,advice,setup,viewpage,secondpage;
+    Button add,remove,databtn,readBtn,download,advice,setup,viewpage,secondpage,rxjavatest,imageloader;
     private ImageView imageView;
     private ImageView bImageView;
 
@@ -222,6 +224,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent i=new Intent(MainActivity.this,SecondViewPagerActivity.class);
                 startActivity(i);
             }
+        });
+
+        rxjavatest=findViewById(R.id.rxjava_test);
+        rxjavatest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(MainActivity.this,RetrofitAndRxjavaAcvitity.class);
+                startActivity(i);
+            }
+        });
+
+        imageloader=findViewById(R.id.imageloader);
+        imageloader.setOnClickListener(v->{
+            Intent i=new Intent(MainActivity.this,ImageLoaderAcvitity.class);
+            startActivity(i);
         });
     }
 

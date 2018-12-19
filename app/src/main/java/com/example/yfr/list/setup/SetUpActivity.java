@@ -65,7 +65,7 @@ public class SetUpActivity extends AppCompatActivity {
         //设置为垂直布局，这也是默认的
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
         //设置Adapter
-        recyclerView.setAdapter(setUpAdapter = new SetUpAdapter(setUpEntities));
+        recyclerView.setAdapter(setUpAdapter = new SetUpAdapter(setUpEntities,getApplicationContext()));
 
         notifiSwitch = findViewById(R.id.notifi_switch);
         notifiSwitch.setChecked(notifiIsEnabled);

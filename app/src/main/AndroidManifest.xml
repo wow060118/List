@@ -68,6 +68,18 @@
             android:screenOrientation="portrait" >
 
         </activity>
+
+        <activity android:name=".rxjava.RetrofitAndRxjavaAcvitity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+
+        </activity>
+
+        <activity android:name=".imageloader.ImageLoaderAcvitity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+
+        </activity>
     </application>
 
 </manifest>

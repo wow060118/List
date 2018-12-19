@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.yfr.list.R;
 import com.example.yfr.list.entity.EventBusMsg;
 import com.example.yfr.list.entity.SetUpEntity;
+import com.example.yfr.list.util.CacheUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -21,13 +22,15 @@ import java.util.List;
 
 public class SetUpAdapter extends RecyclerView.Adapter<SetUpAdapter.SetUpViewHolder> {
     private List<SetUpEntity> entityList;
+    private Context context;
 
     public SetUpAdapter(){
 
     }
 
-    public SetUpAdapter(List<SetUpEntity> entityList) {
+    public SetUpAdapter(List<SetUpEntity> entityList,Context context) {
         this.entityList = entityList;
+        this.context= context;
     }
 
     public List<SetUpEntity> getEntityList() {
@@ -59,6 +62,14 @@ public class SetUpAdapter extends RecyclerView.Adapter<SetUpAdapter.SetUpViewHol
             eventBusMsg.setType(1);
             eventBusMsg.setMsg(s.getTitle());
             EventBus.getDefault().post(eventBusMsg);
+            if(s.isCache()){
+                CacheUtil.clearAllCache(context);
+                try {
+                    setUpViewHolder.cache.setText(CacheUtil.getTotalCacheSize(context));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         });
     }
 
