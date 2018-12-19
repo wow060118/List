@@ -80,6 +80,12 @@
             android:screenOrientation="portrait" >
 
         </activity>
+
+        <activity android:name=".banner.BannerActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+
+        </activity>
     </application>
 
 </manifest>

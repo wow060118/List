@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.yfr.list.advice.AdviceActivity;
+import com.example.yfr.list.banner.BannerActivity;
 import com.example.yfr.list.db.DaoMaster;
 import com.example.yfr.list.db.DaoSession;
 import com.example.yfr.list.db.Entity;
@@ -238,6 +239,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageloader=findViewById(R.id.imageloader);
         imageloader.setOnClickListener(v->{
             Intent i=new Intent(MainActivity.this,ImageLoaderAcvitity.class);
+            startActivity(i);
+        });
+
+        Button banner=findViewById(R.id.banner);
+        banner.setOnClickListener(v->{
+            Intent i=new Intent(MainActivity.this,BannerActivity.class);
             startActivity(i);
         });
     }
