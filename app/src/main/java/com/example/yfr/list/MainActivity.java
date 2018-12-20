@@ -247,6 +247,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent i=new Intent(MainActivity.this,BannerActivity.class);
             startActivity(i);
         });
+
+        Button scroll=findViewById(R.id.scroll);
+        scroll.setOnClickListener(v->{
+            Intent i=new Intent(MainActivity.this,ScrollerActivity.class);
+            startActivity(i);
+        });
     }
 
     @Override
