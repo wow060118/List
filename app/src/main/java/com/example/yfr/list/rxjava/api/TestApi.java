@@ -15,4 +15,7 @@ import retrofit2.http.Query;
 public interface TestApi {
     @GET("top250")
     Call<ResponseBody> getString (@Query("start")int start, @Query("count")int count);
+
+    @GET("getUser")
+    Call<UserEntity> getUser (@Query("username")String username);
 }

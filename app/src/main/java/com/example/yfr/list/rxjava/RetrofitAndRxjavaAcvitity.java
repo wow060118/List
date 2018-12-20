@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.example.yfr.list.rxjava.api.TestApi;
+import com.example.yfr.list.rxjava.api.UserEntity;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -22,7 +23,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @Modified_By:
  */
 public class RetrofitAndRxjavaAcvitity extends AppCompatActivity {
-    private static final String BASE_URL = "https://api.douban.com/v2/movie/";
+//    private static final String BASE_URL = "https://api.douban.com/v2/movie/";
+    private static final String BASE_URL = "http://172.16.149.25:8080/user/";
     private Retrofit retrofit;
 
     @Override
@@ -30,17 +32,23 @@ public class RetrofitAndRxjavaAcvitity extends AppCompatActivity {
         super.onCreate(starInstanceState);
         init();
         TestApi testApi = retrofit.create(TestApi.class);
-        Call<ResponseBody> call = testApi.getString(0, 20);
-        call.enqueue(new Callback<ResponseBody>(){
+//        Call<ResponseBody> call = testApi.getString(0, 20);
+        Call<UserEntity> call = testApi.getUser("username");
+        testApi.getUser("username");
+        call.enqueue(new Callback<UserEntity>(){
 
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.i("i", JSON.toJSONString(response));
+            public void onResponse(Call<UserEntity> call, Response<UserEntity> response) {
+
+                UserEntity entity = response.body();
+                Log.i("response", entity+"");
+//                Log.i(new UserEntity());
+
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+            public void onFailure(Call<UserEntity> call, Throwable t) {
+                Log.i("response","fail");
             }
         });
     }
