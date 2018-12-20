@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -80,6 +81,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences sharedPreferences=this.getSharedPreferences("share",MODE_PRIVATE);
+        boolean isFirstRun=sharedPreferences.getBoolean("isFirstRun", true);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        if(isFirstRun){
+            Intent i=new Intent(MainActivity.this,BannerActivity.class);
+            startActivity(i);
+            Log.i("first","第一次进入");
+            Toast.makeText(MainActivity.this, "第一次运行", Toast.LENGTH_SHORT).show();
+            editor.putBoolean("isFirstRun", false);
+            editor.commit();
+        }else{
+            Intent i=new Intent(MainActivity.this,ScrollerActivity.class);
+            startActivity(i);
+            Log.i("first","不是第一次进入");
+            Toast.makeText(MainActivity.this, "不是第一次运行", Toast.LENGTH_SHORT).show();
+        }
+
         initDataBase();
         initData();
 

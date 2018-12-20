@@ -1,0 +1,20 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center"
+        android:text="第一个TextView"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:text="第二个TextView"
+        android:textColor="#000000" />
+</merge>
