@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.yfr.demo" >
+    <application>
+        <activity android:name=".channel.ChannelManagementActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".DemoMainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+
+    </application>
+</manifest>

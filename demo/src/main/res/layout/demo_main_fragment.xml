@@ -1,0 +1,105 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/demo_main_pic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/demo_pic"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/demo_buttonshape"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/more_category"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/user_icon_me_video_sel" />
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toEndOf="@+id/more_category"
+            android:text="类别测试"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/category"
+            android:src="@drawable/player_icon_rec_follower" />
+    </RelativeLayout>
+
+
+
+
+    <ImageView
+        android:id="@+id/head_pic"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/player_icon_rec_follower" />
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="姓名" />
+
+    <ImageView
+        android:id="@+id/demo_comment"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="100dp"
+        android:src="@drawable/_p_icon_comment" />
+
+    <ImageView
+        android:id="@+id/pic_liked"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="170dp"
+        android:src="@drawable/player_icon_unlike" />
+
+    <ImageView
+        android:id="@+id/pic_more"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="240dp"
+        android:src="@drawable/player_icon_more" />
+
+    <ImageView
+        android:id="@+id/myself"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="300dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/ic_fullsearch_group" />
+
+
+
+
+</RelativeLayout>

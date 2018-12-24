@@ -1,16 +1,20 @@
-apply plugin: 'com.android.application'
-apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 28
+
+
+
     defaultConfig {
-        applicationId "com.example.yfr.list"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,35 +25,20 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
+
 }
-
-
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.facebook.shimmer:shimmer:0.3.0'
     compile 'com.android.support:recyclerview-v7:28.0.0'
     compile group: 'com.google.guava', name: 'guava', version: '27.0.1-android'
     compile group: 'com.alibaba', name: 'fastjson', version: '1.2.54'
-    implementation project(':demo')
-    compile 'org.greenrobot:greendao:3.2.2' // add library
-    compile 'net.zetetic:android-database-sqlcipher:3.5.6'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
     compile 'org.greenrobot:eventbus:3.0.0'
-    api "io.reactivex.rxjava2:rxjava:2.1.5"
-    compile'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    compile 'com.squareup.picasso:picasso:2.5.2'
 
-}
-
-greendao {
-    schemaVersion 1//数据库版本号
-    daoPackage 'com.example.yfr.list.db'//设置DaoMaster、DaoSession、Dao包名
-    targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
 }
