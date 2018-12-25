@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.yfr.demo.DemoMainActivity;
+import com.example.yfr.demo.demomainfragment.DemoMainFragment;
 import com.example.yfr.list.advice.AdviceActivity;
 import com.example.yfr.list.banner.BannerActivity;
 import com.example.yfr.list.db.DaoMaster;
@@ -82,25 +83,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_activity_main);
+        setContentView(R.layout.activity_splash);
 
 
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    long startTime = System.currentTimeMillis();
-//                    long currentTime = System.currentTimeMillis()-startTime;
-//                    if(delayTime-currentTime>0){
-//                        try {
-//                            Thread.sleep(delayTime-currentTime);
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                    startActivity(new Intent(MainActivity.this,DemoMainFragment.class));
-//                    finish();
-//                }
-//            }).start();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    long startTime = System.currentTimeMillis();
+                    long currentTime = System.currentTimeMillis()-startTime;
+                    if(delayTime-currentTime>0){
+                        try {
+                            Thread.sleep(delayTime-currentTime);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    startActivity(new Intent(MainActivity.this,DemoMainActivity.class));
+                    finish();
+                }
+            }).start();
 
 
 

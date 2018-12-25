@@ -101,6 +101,7 @@ public class BannerActivity extends AppCompatActivity implements ViewPager.OnPag
         mDotLinearLayout.getChildAt(this.position).setVisibility(View.INVISIBLE);
         mDotLinearLayout.getChildAt(newPos).setVisibility(View.VISIBLE);
         mTextViewDesc.setText(resTxt[newPos]);
+        System.out.println(newPos+"       "+position);
         this.position = newPos;
     }
 

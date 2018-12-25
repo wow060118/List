@@ -1,11 +1,13 @@
 package com.example.yfr.list.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -71,6 +73,6 @@ public class MyView extends View {
 
         paint.setColor(Color.GREEN);
         canvas.drawArc(rectF,0,50,false,paint);
-
+//        Bitmap image = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
         }
 }

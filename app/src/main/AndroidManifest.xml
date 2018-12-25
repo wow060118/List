@@ -92,6 +92,10 @@
             android:screenOrientation="portrait" >
 
         </activity>
+
+        <activity android:name="com.example.yfr.demo.DemoMainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

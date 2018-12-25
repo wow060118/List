@@ -7,6 +7,5 @@
         <activity android:name=".DemoMainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-
     </application>
 </manifest>
