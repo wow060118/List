@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_main);
 
 
             new Thread(new Runnable() {
@@ -109,180 +109,180 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-//
-//        initDataBase();
-//        initData();
-//
-////        String TAG = "系统参数：";
-////        Log.e(TAG, "手机厂商：" + SystemUtil.getDeviceBrand());
-////        Log.e(TAG, "手机型号：" + SystemUtil.getSystemModel());
-////        Log.e(TAG, "手机当前系统语言：" + SystemUtil.getSystemLanguage());
-////        Log.e(TAG, "Android系统版本号：" + SystemUtil.getSystemVersion());
-//
-//
-//
-//        recyclerView = findViewById(R.id.recyclerView);
-//
-////        System.out.println(JSON.toJSONString(list));
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        //设置分割线
-//        recyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,DividerItemDecoration.VERTICAL));
-//        //设置布局管理器
-//        recyclerView.setLayoutManager(layoutManager);
-//        //设置为垂直布局，这也是默认的
-//        layoutManager.setOrientation(OrientationHelper.VERTICAL);
-//        //设置Adapter
-//        recyclerView.setAdapter(myAdapter = new MyAdapter(list));
-//
-////        //设置分隔线
-////        recyclerView.addItemDecoration( new DividerGridItemDecoration(this ));
-////        //设置增加或删除条目的动画
-////        recyclerView.setItemAnimator( new DefaultItemAnimator());
-//        add = findViewById(R.id.btn);
-//        remove = findViewById(R.id.remove);
-//        databtn = findViewById(R.id.dataBaseButton);
-//        readBtn = findViewById(R.id.dataBaseButtonRead);
-//        download =findViewById(R.id.download);
-//        download.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(MainActivity.this,Download.class);
-//                startActivity(i);
-//
-//            }
-//        });
-//        EventBus.getDefault().register(this);
-//        demo_advice =findViewById(R.id.demo_advice);
-//        demo_advice.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent i =new Intent(MainActivity.this,AdviceActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        imageView = findViewById(R.id.img);
-//
-//        bImageView = getBIimageView();
-//
-//        dialog = new Dialog(MainActivity.this);
-//
-//        dialog.setContentView(bImageView);
-//        bImageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        bImageView.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                //弹出的“保存图片”的Dialog
-//                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-//                builder.setItems(new String[]{"长事件"}, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Toast.makeText(MainActivity.this, "这是一个长点击事件", Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//                builder.show();
-//                return true;
-//            }
-//        });
-//
-//
-//        LongClickUtils.setLongClick(new Handler(), imageView, 2000, new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                //todo:补充长按事件的处理逻辑
-//                Toast.makeText(MainActivity.this, "这是一个长点击事件", Toast.LENGTH_LONG).show();
-//                return true;
-//            }
-//        });
-//
-//        imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                dialog.show();
-////                Toast.makeText(MainActivity.this, "这是一个短点击事件", Toast.LENGTH_LONG).show();
-//                Intent i =new Intent(MainActivity.this,FollowPicActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        demo_setup = findViewById(R.id.demo_setup);
-//        demo_setup.setOnClickListener(v -> {
-//            Intent i = new Intent(MainActivity.this,SetUpActivity.class);
-//            startActivity(i);
-//        });
-//
-//        List<Map<String, Object>> listitem = Lists.newArrayList();
-//        for (int i = 0; i < names.length; i++) {
-//            Map<String, Object> showitem = Maps.newHashMap();
-//            showitem.put("touxiang", imgIds[i]);
-//            showitem.put("name", names[i]);
-//            showitem.put("says", says[i]);
-//            listitem.add(showitem);
-//        }
-//
-////        //创建一个simpleAdapter
-////        SimpleAdapter myAdapter = new SimpleAdapter(this, listitem, R.layout.simple_adapter_layout, new String[]{"touxiang", "name", "says"}, new int[]{R.id.imgtou, R.id.name, R.id.says});
-//        ListView listView = (ListView) findViewById(R.id.list_test);
-//        List<User>  users=Lists.newArrayList();
-//        users.add(new User("AAAAA","AAAAAAAAAA",R.mipmap.common_icon_black_back));
-//        users.add(new User("BBBBB","BBBBBBBBBB",R.mipmap.common_icon_right_arrow));
-//        users.add(new User("CCCCC","CCCCCCCCCC",R.mipmap.next_icon));
-//        UserAdapter userAdapter=new UserAdapter(users,MainActivity.this);
-//        listView.setAdapter(userAdapter);
-//        listView.setOnItemClickListener(this);
-//
-//
-//        viewpage=findViewById(R.id.view_page);
-//        viewpage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i=new Intent(MainActivity.this,ViewPagerActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        secondpage=findViewById(R.id.second_view_page);
-//        secondpage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i=new Intent(MainActivity.this,SecondViewPagerActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        rxjavatest=findViewById(R.id.rxjava_test);
-//        rxjavatest.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i =new Intent(MainActivity.this,RetrofitAndRxjavaAcvitity.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        imageloader=findViewById(R.id.imageloader);
-//        imageloader.setOnClickListener(v->{
-//            Intent i=new Intent(MainActivity.this,ImageLoaderAcvitity.class);
-//            startActivity(i);
-//        });
-//
-//        Button banner=findViewById(R.id.banner);
-//        banner.setOnClickListener(v->{
-//            Intent i=new Intent(MainActivity.this,BannerActivity.class);
-//            startActivity(i);
-//        });
-//
-//        Button scroll=findViewById(R.id.scroll);
-//        scroll.setOnClickListener(v->{
-//            Intent i=new Intent(MainActivity.this,ScrollerActivity.class);
-//            startActivity(i);
-//        });
+
+        initDataBase();
+        initData();
+
+//        String TAG = "系统参数：";
+//        Log.e(TAG, "手机厂商：" + SystemUtil.getDeviceBrand());
+//        Log.e(TAG, "手机型号：" + SystemUtil.getSystemModel());
+//        Log.e(TAG, "手机当前系统语言：" + SystemUtil.getSystemLanguage());
+//        Log.e(TAG, "Android系统版本号：" + SystemUtil.getSystemVersion());
+
+
+
+        recyclerView = findViewById(R.id.recyclerView);
+
+//        System.out.println(JSON.toJSONString(list));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        //设置分割线
+        recyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,DividerItemDecoration.VERTICAL));
+        //设置布局管理器
+        recyclerView.setLayoutManager(layoutManager);
+        //设置为垂直布局，这也是默认的
+        layoutManager.setOrientation(OrientationHelper.VERTICAL);
+        //设置Adapter
+        recyclerView.setAdapter(myAdapter = new MyAdapter(list));
+
+//        //设置分隔线
+//        recyclerView.addItemDecoration( new DividerGridItemDecoration(this ));
+//        //设置增加或删除条目的动画
+//        recyclerView.setItemAnimator( new DefaultItemAnimator());
+        add = findViewById(R.id.btn);
+        remove = findViewById(R.id.remove);
+        databtn = findViewById(R.id.dataBaseButton);
+        readBtn = findViewById(R.id.dataBaseButtonRead);
+        download =findViewById(R.id.download);
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,Download.class);
+                startActivity(i);
+
+            }
+        });
+        EventBus.getDefault().register(this);
+        advice =findViewById(R.id.advice);
+        advice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i =new Intent(MainActivity.this,AdviceActivity.class);
+                startActivity(i);
+            }
+        });
+
+        imageView = findViewById(R.id.img);
+
+        bImageView = getBIimageView();
+
+        dialog = new Dialog(MainActivity.this);
+
+        dialog.setContentView(bImageView);
+        bImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        bImageView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                //弹出的“保存图片”的Dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setItems(new String[]{"长事件"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "这是一个长点击事件", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.show();
+                return true;
+            }
+        });
+
+
+        LongClickUtils.setLongClick(new Handler(), imageView, 2000, new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                //todo:补充长按事件的处理逻辑
+                Toast.makeText(MainActivity.this, "这是一个长点击事件", Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                dialog.show();
+//                Toast.makeText(MainActivity.this, "这是一个短点击事件", Toast.LENGTH_LONG).show();
+                Intent i =new Intent(MainActivity.this,ImageFallActivity.class);
+                startActivity(i);
+            }
+        });
+
+        setup = findViewById(R.id.setup);
+        setup.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this,SetUpActivity.class);
+            startActivity(i);
+        });
+
+        List<Map<String, Object>> listitem = Lists.newArrayList();
+        for (int i = 0; i < names.length; i++) {
+            Map<String, Object> showitem = Maps.newHashMap();
+            showitem.put("touxiang", imgIds[i]);
+            showitem.put("name", names[i]);
+            showitem.put("says", says[i]);
+            listitem.add(showitem);
+        }
+
+//        //创建一个simpleAdapter
+//        SimpleAdapter myAdapter = new SimpleAdapter(this, listitem, R.layout.simple_adapter_layout, new String[]{"touxiang", "name", "says"}, new int[]{R.id.imgtou, R.id.name, R.id.says});
+        ListView listView = (ListView) findViewById(R.id.list_test);
+        List<User>  users=Lists.newArrayList();
+        users.add(new User("AAAAA","AAAAAAAAAA",R.mipmap.common_icon_black_back));
+        users.add(new User("BBBBB","BBBBBBBBBB",R.mipmap.common_icon_right_arrow));
+        users.add(new User("CCCCC","CCCCCCCCCC",R.mipmap.next_icon));
+        UserAdapter userAdapter=new UserAdapter(users,MainActivity.this);
+        listView.setAdapter(userAdapter);
+        listView.setOnItemClickListener(this);
+
+
+        viewpage=findViewById(R.id.view_page);
+        viewpage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,ViewPagerActivity.class);
+                startActivity(i);
+            }
+        });
+
+        secondpage=findViewById(R.id.second_view_page);
+        secondpage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,SecondViewPagerActivity.class);
+                startActivity(i);
+            }
+        });
+
+        rxjavatest=findViewById(R.id.rxjava_test);
+        rxjavatest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(MainActivity.this,RetrofitAndRxjavaAcvitity.class);
+                startActivity(i);
+            }
+        });
+
+        imageloader=findViewById(R.id.imageloader);
+        imageloader.setOnClickListener(v->{
+            Intent i=new Intent(MainActivity.this,ImageLoaderAcvitity.class);
+            startActivity(i);
+        });
+
+        Button banner=findViewById(R.id.banner);
+        banner.setOnClickListener(v->{
+            Intent i=new Intent(MainActivity.this,BannerActivity.class);
+            startActivity(i);
+        });
+
+        Button scroll=findViewById(R.id.scroll);
+        scroll.setOnClickListener(v->{
+            Intent i=new Intent(MainActivity.this,ScrollerActivity.class);
+            startActivity(i);
+        });
     }
 
     @Override

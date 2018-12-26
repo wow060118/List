@@ -1,5 +1,7 @@
 package com.example.yfr.demo;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -7,11 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yfr.demo.demomainfragment.DemoMainPicAdapter;
 import com.example.yfr.demo.entity.MainPicEntity;
+import com.example.yfr.demo.follow.LikedFallActivity;
+import com.example.yfr.demo.view.EditTextWithDel;
 import com.example.yfr.demo.viewpager.HorizontalVerticalViewPager;
 import com.google.common.collect.Lists;
 
@@ -28,7 +35,7 @@ public class DemoMainActivity extends AppCompatActivity {
     private ViewStub guideViewStub;
     private TextView textView;
     private View view;
-
+    private Button button;
 
     private HorizontalVerticalViewPager mViewPager;
 
@@ -44,7 +51,7 @@ public class DemoMainActivity extends AppCompatActivity {
         initView();
         initEvent();
 
-        SharedPreferences sharedPreferences = this.getSharedPreferences("share", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("share",  MODE_PRIVATE);
         boolean isFirstRun = sharedPreferences.getBoolean("isFirstRun", true);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if (isFirstRun) {
@@ -55,7 +62,11 @@ public class DemoMainActivity extends AppCompatActivity {
             editor.putBoolean("isFirstRun", false);
             editor.commit();
         }
-
+//        button=findViewById(R.id.setup);
+//        button.setOnClickListener(v->{
+//            Intent intent=new Intent(DemoMainActivity.this,LikedFallActivity.class);
+//            startActivity(intent);
+//        });
     }
 
     private void initData() {

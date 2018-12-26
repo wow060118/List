@@ -3,17 +3,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/remove_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:text="x" />
+    <com.example.yfr.demo.view.EditTextWithDel
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/deltext"
+    android:text="111111111"
+    android:focusable="true"
+    android:focusableInTouchMode="true"/>
 
-    <ImageView
-        android:id="@+id/pic"
+    <EditText
+        android:id="@+id/ceshi"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="56dp"
+        android:background="@android:color/transparent"
+        android:gravity="top|left"
+        android:hint="联系方式（手机、邮箱或QQ）"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textColorHint="#9ca4a9"
+        android:textSize="15sp"
+        android:text="111111111"/>
 
+    <EditText
+        android:id="@+id/ceshi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="126dp"
+        android:background="@android:color/transparent"
+        android:gravity="top|left"
+        android:hint="联系方式（手机、邮箱或QQ）"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textColorHint="#9ca4a9"
+        android:textSize="15sp" />
 </RelativeLayout>
