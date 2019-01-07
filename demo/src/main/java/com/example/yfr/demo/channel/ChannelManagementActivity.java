@@ -75,7 +75,7 @@ public class ChannelManagementActivity extends AppCompatActivity {
 //            @Override
 //            public void onRefresh() {
 //                //发送网络请求
-////                headAdd();
+//                headAdd();
 //                //停止刷新
 //                swipeRefreshLayout.setRefreshing(false);
 //                //刷新RecycleView

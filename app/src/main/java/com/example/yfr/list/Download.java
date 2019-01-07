@@ -1,12 +1,15 @@
 package com.example.yfr.list;
 
 import android.Manifest;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -24,10 +27,10 @@ import java.io.File;
 public class Download extends AppCompatActivity implements View.OnClickListener {
     Button button, test;
     int mProgressStatus = 0;
-
+    Button button3;
     ProgressBar bar;
     TextView textView ;
-
+    LocalBroadcastManager localBroadcastManager;
     private static final int UPDATE=1;
     private Handler handler=new Handler(){
         public void handleMessage(Message message){
@@ -129,6 +132,13 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
                     }
                 }.start();
             }
+        });
+        button3=findViewById(R.id.download3);
+        localBroadcastManager=LocalBroadcastManager.getInstance(this);
+        button3.setOnClickListener(v->{
+            Intent i=new Intent();
+            i.setAction("com.example.sendMsg");
+            localBroadcastManager.sendBroadcast(i);
         });
 
 

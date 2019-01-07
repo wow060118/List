@@ -1,9 +1,11 @@
 package com.example.yfr.demo;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import com.example.yfr.demo.demomainfragment.DemoMainPicAdapter;
 import com.example.yfr.demo.entity.MainPicEntity;
 import com.example.yfr.demo.follow.LikedFallActivity;
+import com.example.yfr.demo.util.SharedPreferenceUtil;
 import com.example.yfr.demo.view.EditTextWithDel;
 import com.example.yfr.demo.viewpager.HorizontalVerticalViewPager;
 import com.google.common.collect.Lists;
@@ -41,7 +44,7 @@ public class DemoMainActivity extends AppCompatActivity {
 
     private List<MainPicEntity> picEntityList= Lists.newArrayList();
 
-
+    private NetWorkChangeBroadcast broadcast;
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -50,17 +53,14 @@ public class DemoMainActivity extends AppCompatActivity {
         initData();
         initView();
         initEvent();
-
-        SharedPreferences sharedPreferences = this.getSharedPreferences("share",  MODE_PRIVATE);
-        boolean isFirstRun = sharedPreferences.getBoolean("isFirstRun", true);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        boolean isFirstRun = SharedPreferenceUtil.getInstance(this,"share").getParam("isFirstRun",true);
+        Log.i("isFirstRun", "isFirstRun:"+isFirstRun);
         if (isFirstRun) {
             Log.i("first", "第一次进入");
             // 、 进行第一次判断
             guideViewStub.inflate();
-            Toast.makeText(DemoMainActivity.this, "", Toast.LENGTH_SHORT).show();
-            editor.putBoolean("isFirstRun", false);
-            editor.commit();
+            Toast.makeText(DemoMainActivity.this, "第一次进入", Toast.LENGTH_SHORT).show();
+            SharedPreferenceUtil.getInstance(this,"share").setParam("isFirstRun",false);
         }
 //        button=findViewById(R.id.setup);
 //        button.setOnClickListener(v->{
@@ -115,6 +115,20 @@ public class DemoMainActivity extends AppCompatActivity {
             }
         });//设置页面切换时的监听器(可选，用了之后要重写它的回调方法处理页面切换时候的事务)
         mViewPager.setAdapter(new DemoMainPicAdapter(getSupportFragmentManager(), picEntityList));
+
+//        Intent intent=new Intent();
+//        intent.setAction("andorid.net.conn.CONNECTIVITY_CHANGE");
+//        broadcast=new NetWorkChangeBroadcast();
+//        broadcast.onReceive(getApplicationContext(),intent);
+//        LocalBroadcastManager localBroadcastManager=LocalBroadcastManager.getInstance(this);
+//        localBroadcastManager.
     }
 
+    private class NetWorkChangeBroadcast extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.i("change","网络改变");
+            Toast.makeText(context,"网络改变",Toast.LENGTH_SHORT).show();
+        }
+    }
 }

@@ -74,6 +74,11 @@ public class SetUpAdapter extends RecyclerView.Adapter<SetUpAdapter.SetUpViewHol
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    @Override
     public int getItemCount() {
         return entityList.size();
     }

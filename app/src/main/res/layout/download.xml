@@ -52,4 +52,17 @@
         android:layout_marginTop="55dp"
         android:text="0%" />
 
+
+    <Button
+        android:id="@+id/download3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="135dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:onClick="onClick"
+        android:text="发送广播" />
 </RelativeLayout>

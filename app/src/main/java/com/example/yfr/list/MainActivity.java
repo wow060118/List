@@ -2,14 +2,17 @@ package com.example.yfr.list;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -63,7 +66,8 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemClickListener {
+public class
+MainActivity extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemClickListener {
     private RecyclerView recyclerView;
     private List<String> list;
     MyAdapter myAdapter;
@@ -85,29 +89,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    long startTime = System.currentTimeMillis();
-                    long currentTime = System.currentTimeMillis()-startTime;
-                    if(delayTime-currentTime>0){
-                        try {
-                            Thread.sleep(delayTime-currentTime);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    startActivity(new Intent(MainActivity.this,DemoMainActivity.class));
-                    finish();
-                }
-            }).start();
-
-
+//
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    long startTime = System.currentTimeMillis();
+//                    long currentTime = System.currentTimeMillis()-startTime;
+//                    if(delayTime-currentTime>0){
+//                        try {
+//                            Thread.sleep(delayTime-currentTime);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                    startActivity(new Intent(MainActivity.this,DemoMainActivity.class));
+//                    finish();
+//                }
+//            }).start();
 
 
+        LocalBroadcastManager localBroadcastManager=LocalBroadcastManager.getInstance(this);
+        IntentFilter intentFilter =new IntentFilter();
 
+        intentFilter.addAction("com.example.sendMsg");
 
+        NetWorkChangeBroadcast netWorkChangeBroadcast=new NetWorkChangeBroadcast();
+        localBroadcastManager.registerReceiver(netWorkChangeBroadcast,intentFilter);
 
 
         initDataBase();
