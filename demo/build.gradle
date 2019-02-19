@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-
 android {
     compileSdkVersion 28
 
@@ -41,4 +40,11 @@ dependencies {
     compile group: 'com.alibaba', name: 'fastjson', version: '1.2.54'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.beloo.widget:ChipsLayoutManager:0.3.7@aar'
+    compile 'com.heaven7.android.dragflowlayout:dragflowlayout:1.8.8'
+    // Optional: include all native libraries for distribution
+    compile "io.objectbox:objectbox-linux:2.3.1"
+    compile "io.objectbox:objectbox-macos:2.3.1"
+    compile "io.objectbox:objectbox-windows:2.3.1"
 }
+
+apply plugin: 'io.objectbox'

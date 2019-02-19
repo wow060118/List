@@ -11,7 +11,10 @@ import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +27,7 @@ import android.view.LayoutInflater;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -51,6 +55,7 @@ import com.example.yfr.list.test.User;
 import com.example.yfr.list.test.UserAdapter;
 import com.example.yfr.list.util.LongClickUtils;
 import com.example.yfr.list.util.SystemUtil;
+import com.example.yfr.list.viewpage.BaseActivity;
 import com.example.yfr.list.viewpage.SecondViewPagerActivity;
 import com.example.yfr.list.viewpage.ViewPagerActivity;
 import com.google.common.base.Strings;
@@ -67,11 +72,11 @@ import java.util.List;
 import java.util.Map;
 
 public class
-MainActivity extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemClickListener {
+MainActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     private RecyclerView recyclerView;
     private List<String> list;
     MyAdapter myAdapter;
-    Button add,remove,databtn,readBtn,download,advice,setup,viewpage,secondpage,rxjavatest,imageloader;
+    Button add, remove, databtn, readBtn, download, advice, setup, viewpage, secondpage, rxjavatest, imageloader;
     private ImageView imageView;
     private ImageView bImageView;
 
@@ -90,31 +95,70 @@ MainActivity extends AppCompatActivity implements View.OnClickListener,AdapterVi
         setContentView(R.layout.activity_main);
 
 //
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    long startTime = System.currentTimeMillis();
-//                    long currentTime = System.currentTimeMillis()-startTime;
-//                    if(delayTime-currentTime>0){
-//                        try {
-//                            Thread.sleep(delayTime-currentTime);
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                    startActivity(new Intent(MainActivity.this,DemoMainActivity.class));
-//                    finish();
-//                }
-//            }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long startTime = System.currentTimeMillis();
+                long currentTime = System.currentTimeMillis() - startTime;
+                if (delayTime - currentTime > 0) {
+                    try {
+                        Thread.sleep(delayTime - currentTime);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                startActivity(new Intent(MainActivity.this, DemoMainActivity.class));
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+//                        Intent intent = new Intent();
+//                        intent.setClass(AppManager.getAppManager().currentActivity(),GlobalDialog.class);
+//                        startActivity(intent);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+////                                    Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+////                                    intent.setData(Uri.parse("package:" + getPackageName()));
+////                                    startActivityForResult(intent,100);
+                                    System.out.println("llllllllllllllllllllllll");
+
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(AppManager.getAppManager().currentActivity());
+                                    System.out.println("     aaaaa:" + AppManager.getAppManager().currentActivity());
+                                    builder.setMessage("开启推送？");
+                                    builder.setPositiveButton("确定", (dialog, which) -> {
+
+                                    }).setNegativeButton("取消", ((dialog, which) -> {
+
+                                    }));
+                                    AlertDialog dialog = builder.create();
+////                                    if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+////                                        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
+////                                    }else {
+////                                        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);//将弹出框设置为全局
+////                                    }
+                                    dialog.setCanceledOnTouchOutside(false);
+                                    dialog.show();
+                                }
+                            });
+                    }
+                }).start();
+            }
+        }).start();
 
 
-        LocalBroadcastManager localBroadcastManager=LocalBroadcastManager.getInstance(this);
-        IntentFilter intentFilter =new IntentFilter();
+        LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        IntentFilter intentFilter = new IntentFilter();
 
         intentFilter.addAction("com.example.sendMsg");
 
-        NetWorkChangeBroadcast netWorkChangeBroadcast=new NetWorkChangeBroadcast();
-        localBroadcastManager.registerReceiver(netWorkChangeBroadcast,intentFilter);
+        NetWorkChangeBroadcast netWorkChangeBroadcast = new NetWorkChangeBroadcast();
+        localBroadcastManager.registerReceiver(netWorkChangeBroadcast, intentFilter);
 
 
         initDataBase();
@@ -127,13 +171,12 @@ MainActivity extends AppCompatActivity implements View.OnClickListener,AdapterVi
 //        Log.e(TAG, "Android系统版本号：" + SystemUtil.getSystemVersion());
 
 
-
         recyclerView = findViewById(R.id.recyclerView);
 
 //        System.out.println(JSON.toJSONString(list));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         //设置分割线
-        recyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this, DividerItemDecoration.VERTICAL));
         //设置布局管理器
         recyclerView.setLayoutManager(layoutManager);
         //设置为垂直布局，这也是默认的
@@ -149,22 +192,22 @@ MainActivity extends AppCompatActivity implements View.OnClickListener,AdapterVi
         remove = findViewById(R.id.remove);
         databtn = findViewById(R.id.dataBaseButton);
         readBtn = findViewById(R.id.dataBaseButtonRead);
-        download =findViewById(R.id.download);
+        download = findViewById(R.id.download);
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Download.class);
+                Intent i = new Intent(MainActivity.this, Download.class);
                 startActivity(i);
 
             }
         });
         EventBus.getDefault().register(this);
-        advice =findViewById(R.id.advice);
+        advice = findViewById(R.id.advice);
         advice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i =new Intent(MainActivity.this,AdviceActivity.class);
+                Intent i = new Intent(MainActivity.this, AdviceActivity.class);
                 startActivity(i);
             }
         });
@@ -214,14 +257,14 @@ MainActivity extends AppCompatActivity implements View.OnClickListener,AdapterVi
             public void onClick(View v) {
 //                dialog.show();
 //                Toast.makeText(MainActivity.this, "这是一个短点击事件", Toast.LENGTH_LONG).show();
-                Intent i =new Intent(MainActivity.this,ImageFallActivity.class);
+                Intent i = new Intent(MainActivity.this, ImageFallActivity.class);
                 startActivity(i);
             }
         });
 
         setup = findViewById(R.id.setup);
         setup.setOnClickListener(v -> {
-            Intent i = new Intent(MainActivity.this,SetUpActivity.class);
+            Intent i = new Intent(MainActivity.this, SetUpActivity.class);
             startActivity(i);
         });
 
@@ -237,64 +280,64 @@ MainActivity extends AppCompatActivity implements View.OnClickListener,AdapterVi
 //        //创建一个simpleAdapter
 //        SimpleAdapter myAdapter = new SimpleAdapter(this, listitem, R.layout.simple_adapter_layout, new String[]{"touxiang", "name", "says"}, new int[]{R.id.imgtou, R.id.name, R.id.says});
         ListView listView = (ListView) findViewById(R.id.list_test);
-        List<User>  users=Lists.newArrayList();
-        users.add(new User("AAAAA","AAAAAAAAAA",R.mipmap.common_icon_black_back));
-        users.add(new User("BBBBB","BBBBBBBBBB",R.mipmap.common_icon_right_arrow));
-        users.add(new User("CCCCC","CCCCCCCCCC",R.mipmap.next_icon));
-        UserAdapter userAdapter=new UserAdapter(users,MainActivity.this);
+        List<User> users = Lists.newArrayList();
+        users.add(new User("AAAAA", "AAAAAAAAAA", R.mipmap.common_icon_black_back));
+        users.add(new User("BBBBB", "BBBBBBBBBB", R.mipmap.common_icon_right_arrow));
+        users.add(new User("CCCCC", "CCCCCCCCCC", R.mipmap.next_icon));
+        UserAdapter userAdapter = new UserAdapter(users, MainActivity.this);
         listView.setAdapter(userAdapter);
         listView.setOnItemClickListener(this);
 
 
-        viewpage=findViewById(R.id.view_page);
+        viewpage = findViewById(R.id.view_page);
         viewpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(MainActivity.this,ViewPagerActivity.class);
+                Intent i = new Intent(MainActivity.this, ViewPagerActivity.class);
                 startActivity(i);
             }
         });
 
-        secondpage=findViewById(R.id.second_view_page);
+        secondpage = findViewById(R.id.second_view_page);
         secondpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(MainActivity.this,SecondViewPagerActivity.class);
+                Intent i = new Intent(MainActivity.this, SecondViewPagerActivity.class);
                 startActivity(i);
             }
         });
 
-        rxjavatest=findViewById(R.id.rxjava_test);
+        rxjavatest = findViewById(R.id.rxjava_test);
         rxjavatest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =new Intent(MainActivity.this,RetrofitAndRxjavaAcvitity.class);
+                Intent i = new Intent(MainActivity.this, RetrofitAndRxjavaAcvitity.class);
                 startActivity(i);
             }
         });
 
-        imageloader=findViewById(R.id.imageloader);
-        imageloader.setOnClickListener(v->{
-            Intent i=new Intent(MainActivity.this,ImageLoaderAcvitity.class);
+        imageloader = findViewById(R.id.imageloader);
+        imageloader.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, ImageLoaderAcvitity.class);
             startActivity(i);
         });
 
-        Button banner=findViewById(R.id.banner);
-        banner.setOnClickListener(v->{
-            Intent i=new Intent(MainActivity.this,BannerActivity.class);
+        Button banner = findViewById(R.id.banner);
+        banner.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, BannerActivity.class);
             startActivity(i);
         });
 
-        Button scroll=findViewById(R.id.scroll);
-        scroll.setOnClickListener(v->{
-            Intent i=new Intent(MainActivity.this,ScrollerActivity.class);
+        Button scroll = findViewById(R.id.scroll);
+        scroll.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, ScrollerActivity.class);
             startActivity(i);
         });
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(MainActivity.this,"你点击了第" + position + "项",Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "你点击了第" + position + "项", Toast.LENGTH_SHORT).show();
     }
 
     private void initDataBase() {
@@ -318,12 +361,12 @@ MainActivity extends AppCompatActivity implements View.OnClickListener,AdapterVi
 
     }
 
-    public ImageView getBIimageView(){
+    public ImageView getBIimageView() {
         ImageView iv = new ImageView(this);
         //宽高
         iv.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         //设置Padding
-        iv.setPadding(20,20,20,20);
+        iv.setPadding(20, 20, 20, 20);
         //imageView设置图片
         InputStream is = getResources().openRawResource(R.mipmap.img);
         Drawable drawable = BitmapDrawable.createFromStream(is, null);
@@ -333,48 +376,49 @@ MainActivity extends AppCompatActivity implements View.OnClickListener,AdapterVi
 
     @Override
     public void onClick(View v) {
-        if(v==add) {
+        if (v == add) {
             int i = list.size();
             list.add(i + "");
-            Log.i("add size",list.size()+"");
+            Log.i("add size", list.size() + "");
             myAdapter.setList(list);
             recyclerView.setAdapter(myAdapter);
-        }else if(v==remove){
+        } else if (v == remove) {
 
             int i = list.size();
-            if(i==0){
-                Log.i("size none",list.size()+"");
+            if (i == 0) {
+                Log.i("size none", list.size() + "");
             } else {
                 list.remove(i - 1);
-                Log.i("del size",list.size()+"");
+                Log.i("del size", list.size() + "");
                 myAdapter.setList(list);
                 recyclerView.setAdapter(myAdapter);
             }
-        } else if(v==databtn){
+        } else if (v == databtn) {
 
             Entity entity = new Entity();
             entity.setAge("10");
             entity.setName("demo");
             try {
                 daoSession.getEntityDao().insert(entity);
-            }catch (Exception e){
-                Log.i("data error",e.getMessage());
+            } catch (Exception e) {
+                Log.i("data error", e.getMessage());
             }
             Toast.makeText(MainActivity.this, "增加一条数据", Toast.LENGTH_LONG).show();
-        } else if(v==readBtn){
+        } else if (v == readBtn) {
 
             try {
                 List<Entity> list = daoSession.getEntityDao().queryBuilder()
                         .where(EntityDao.Properties.Age.le(10))
                         .build().list();
                 Log.i("queryList is", JSON.toJSONString(list));
-            }catch (Exception e){
-                Log.i("data error",e.getMessage());
+            } catch (Exception e) {
+                Log.i("data error", e.getMessage());
             }
             Toast.makeText(MainActivity.this, "查询数据", Toast.LENGTH_LONG).show();
         }
 
     }
+
     class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         private List<String> list;
 
@@ -383,7 +427,7 @@ MainActivity extends AppCompatActivity implements View.OnClickListener,AdapterVi
 
         }
 
-        public void setList(List<String> list){
+        public void setList(List<String> list) {
             this.list = list;
         }
 
@@ -413,21 +457,21 @@ MainActivity extends AppCompatActivity implements View.OnClickListener,AdapterVi
     }
 
 
-    private void createDataBase(Context context){
-        DaoMaster.DevOpenHelper devOpenHelper=new DaoMaster.DevOpenHelper(context ,"demo.db");
-        Database database=devOpenHelper.getWritableDb();
-        DaoMaster daoMaster =new DaoMaster(database);
+    private void createDataBase(Context context) {
+        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(context, "demo.db");
+        Database database = devOpenHelper.getWritableDb();
+        DaoMaster daoMaster = new DaoMaster(database);
         daoSession = daoMaster.newSession();
         EntityDao entityDao = daoSession.getEntityDao();
-        entityDao.createTable(database,true);
+        entityDao.createTable(database, true);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBus(String msg){
+    public void onEventBus(String msg) {
         Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
     }
 
-    public DaoSession getDaoSession(){
+    public DaoSession getDaoSession() {
         return daoSession;
     }
 

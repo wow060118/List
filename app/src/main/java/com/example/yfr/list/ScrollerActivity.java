@@ -22,14 +22,14 @@ public class ScrollerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.merge_main);
-//        mViewStub=findViewById(R.id.view_stub);
-//        mViewStub.inflate();
-//        textView=findViewById(R.id.view_stub_text);
-//        findViewById(R.id.view_stub_text).setOnClickListener(v->{
-//            mViewStub.setVisibility(View.INVISIBLE);
-//            Log.i("mview","    "+mViewStub);
-//            Log.i("layout","    "+view);
-//        });
+        mViewStub=findViewById(R.id.view_stub);
+        mViewStub.inflate();
+        textView=findViewById(R.id.view_stub_text);
+        findViewById(R.id.view_stub_text).setOnClickListener(v->{
+            mViewStub.setVisibility(View.INVISIBLE);
+            Log.i("mview","    "+mViewStub);
+            Log.i("layout","    "+view);
+        });
 
     }
 }

@@ -25,18 +25,17 @@
         android:text="编辑"
         android:textSize="15dp" />
 
-    <android.support.v7.widget.RecyclerView
+    <com.heaven7.android.dragflowlayout.DragFlowLayout
         android:layout_below="@id/channel_follow"
-        android:id="@+id/channel_recycleview"
+        android:id="@+id/drag_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp" />
-
     <TextView
         android:id="@+id/hot_channel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/channel_recycleview"
+        android:layout_below="@id/drag_layout"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:text="热门频道"

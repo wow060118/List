@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.example.yfr.demo.CircleProgressView;
 import com.example.yfr.list.api.DownloadApi;
 import com.example.yfr.list.util.DownloadListener;
 import com.example.yfr.list.util.DownloadUtil;
@@ -31,6 +32,7 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
     ProgressBar bar;
     TextView textView ;
     LocalBroadcastManager localBroadcastManager;
+    CircleProgressView circleProgressView;
     private static final int UPDATE=1;
     private Handler handler=new Handler(){
         public void handleMessage(Message message){
@@ -40,11 +42,13 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
                     final int text = data.getInt("progress");
                     System.out.println("update"+ text);
                     bar.setProgress(text);
+                    circleProgressView.setProgress(text);
                     textView.setText(text + "%");
             }
 
         }
     };
+    boolean isEnd=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +56,8 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
 
         bar = findViewById(R.id.progress);
         textView = findViewById(R.id.tvProgress);
-
+        circleProgressView=findViewById(R.id.circle);
+        circleProgressView.setSize(100,100);
         button = findViewById(R.id.download1);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,39 +111,52 @@ public class Download extends AppCompatActivity implements View.OnClickListener 
         });
 
         test =findViewById(R.id.test);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread(){
-                    @Override
-                    public void run() {
-                        int i=0;
-                        while(i<100){
-                            i++;
-                            try {
-                                Thread.sleep(80);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            final int j=i;
-                            bar.setProgress(i);
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    textView.setText(j+"%");
-                                }
-                            });
-                        }
-                    }
-                }.start();
-            }
+        test.setOnClickListener(v->{
+            circleProgressView.startDownLoad();
         });
+//        test.setOnClickListener(new View.OnClickListener() {
+//            @Overrideiu
+//            public void onClick(View v) {
+//                new Thread(){
+//                    @Override
+//                    public void run() {
+//                        int i=0;
+//                        while(i<100){
+//                            i+=10;
+//                            try {
+//                                Thread.sleep(80);
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+//                            final int j=i;
+//                            bar.setProgress(i);
+//                            circleProgressView.setProgress(i);
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    textView.setText(j+"%");
+//                                }
+//                            });
+//                        }
+//                       isEnd=true;
+//                        circleProgressView.startAnimation();
+//                    }
+//                }.start();
+//                circleProgressView.post(()->{
+//                    if(isEnd) {
+//
+//                    }
+//                });
+//
+//            }
+//        });
         button3=findViewById(R.id.download3);
         localBroadcastManager=LocalBroadcastManager.getInstance(this);
         button3.setOnClickListener(v->{
-            Intent i=new Intent();
-            i.setAction("com.example.sendMsg");
-            localBroadcastManager.sendBroadcast(i);
+//            Intent i=new Intent();
+//            i.setAction("com.example.sendMsg");
+//            localBroadcastManager.sendBroadcast(i);
+            circleProgressView.endDownLoad();
         });
 
 

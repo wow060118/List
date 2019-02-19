@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
 
 
@@ -102,6 +103,12 @@
                 <action android:name="com.example.sendMsg"/>
             </intent-filter>
         </receiver>
+
+
+        <activity
+            android:name=".GlobalDialog"
+            android:theme="@android:style/Theme.Dialog">
+        </activity>
     </application>
 
 </manifest>

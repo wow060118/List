@@ -3,25 +3,17 @@ package com.example.yfr.demo;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.yfr.demo.demomainfragment.DemoMainPicAdapter;
 import com.example.yfr.demo.entity.MainPicEntity;
-import com.example.yfr.demo.follow.LikedFallActivity;
 import com.example.yfr.demo.util.SharedPreferenceUtil;
-import com.example.yfr.demo.view.EditTextWithDel;
 import com.example.yfr.demo.viewpager.HorizontalVerticalViewPager;
 import com.google.common.collect.Lists;
 
@@ -45,6 +37,7 @@ public class DemoMainActivity extends AppCompatActivity {
     private List<MainPicEntity> picEntityList= Lists.newArrayList();
 
     private NetWorkChangeBroadcast broadcast;
+    private CircleProgressView circleProgressView;
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -54,6 +47,10 @@ public class DemoMainActivity extends AppCompatActivity {
         initView();
         initEvent();
         boolean isFirstRun = SharedPreferenceUtil.getInstance(this,"share").getParam("isFirstRun",true);
+        Long param = SharedPreferenceUtil.getInstance(this, "share").getParam("time", System.currentTimeMillis());
+        System.out.println("currentTime"+System.currentTimeMillis());
+
+        System.out.println("param:"+param);
         Log.i("isFirstRun", "isFirstRun:"+isFirstRun);
         if (isFirstRun) {
             Log.i("first", "第一次进入");
@@ -61,7 +58,20 @@ public class DemoMainActivity extends AppCompatActivity {
             guideViewStub.inflate();
             Toast.makeText(DemoMainActivity.this, "第一次进入", Toast.LENGTH_SHORT).show();
             SharedPreferenceUtil.getInstance(this,"share").setParam("isFirstRun",false);
+
         }
+//        System.out.println("llllllllllllllllllllllll");
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setMessage("开启推送？");
+//        builder.setPositiveButton("确定", (dialog, which) -> {
+//
+//        }).setNegativeButton("取消", ((dialog, which) -> {
+//
+//        }));
+//        AlertDialog dialog = builder.create();
+//        dialog.setCanceledOnTouchOutside(false);
+//        dialog.show();
 //        button=findViewById(R.id.setup);
 //        button.setOnClickListener(v->{
 //            Intent intent=new Intent(DemoMainActivity.this,LikedFallActivity.class);
@@ -94,27 +104,28 @@ public class DemoMainActivity extends AppCompatActivity {
     private void initView() {
         guideViewStub = findViewById(R.id.guide);
         textView=findViewById(R.id.guide_text);
-        mViewPager=findViewById(R.id.show_viewpager);
-
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
-
-
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                System.out.println(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
-            }
-        });//设置页面切换时的监听器(可选，用了之后要重写它的回调方法处理页面切换时候的事务)
-        mViewPager.setAdapter(new DemoMainPicAdapter(getSupportFragmentManager(), picEntityList));
+        circleProgressView= findViewById(R.id.circle);
+//        mViewPager=findViewById(R.id.show_viewpager);
+//
+//        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
+//
+//
+//            @Override
+//            public void onPageScrolled(int i, float v, int i1) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                System.out.println(position);
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int i) {
+//
+//            }
+//        });//设置页面切换时的监听器(可选，用了之后要重写它的回调方法处理页面切换时候的事务)
+//        mViewPager.setAdapter(new DemoMainPicAdapter(getSupportFragmentManager(), picEntityList));
 
 //        Intent intent=new Intent();
 //        intent.setAction("andorid.net.conn.CONNECTIVITY_CHANGE");

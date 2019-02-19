@@ -28,4 +28,9 @@
         <!--android:id="@+id/advice"-->
         <!--android:layout_marginTop="50dp"-->
         <!--android:text="意见反馈"/>-->
+    <com.example.yfr.demo.CircleProgressView
+        android:id="@+id/circle"
+        android:layout_width="110dp"
+        android:layout_height="110dp" />
+
 </RelativeLayout>
